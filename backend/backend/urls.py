@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ecommerce_api import urls as ecommerce_urls
+from accounts_api import urls as accounts_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api', include(ecommerce_urls)),
+    path('api/', include(ecommerce_urls)),
+    path('api/', include(accounts_urls))
 ]
