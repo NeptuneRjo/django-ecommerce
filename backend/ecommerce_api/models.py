@@ -9,5 +9,5 @@ class StoreItem(models.Model):
     item_thumb_url = models.CharField(max_length=180)
     item_id = models.AutoField(primary_key=True)
 
-    def __self__(self):
+    def __str__(self):
         return self.item_name
