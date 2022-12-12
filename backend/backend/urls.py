@@ -21,6 +21,6 @@ from accounts_api import urls as accounts_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include(ecommerce_urls)),
-    path('api/', include(accounts_urls))
+    path('api/store/', include(ecommerce_urls)),
+    path('api/accounts/', include(accounts_urls))
 ]
