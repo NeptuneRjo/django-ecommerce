@@ -1,12 +1,13 @@
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 from .models import StoreItem
 from .serializers import StoreItemSerializer
+from rest_framework.decorators import api_view
 
 
 # Retrieve items
-def get_items(self, request, *args, **kwargs):
+@api_view(['GET', ])
+def get_items(request):
     store_items = StoreItem.objects.all()
     serializer = StoreItemSerializer(store_items, many=True)
 
