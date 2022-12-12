@@ -42,8 +42,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
 
-        # create a new account, pass user and save
-        account = Account(user=user)
-        account.save()
+        # # create a new account, pass user and save
+        # account = Account(user=user)
+        # account.save()
 
-        return account
+        return user
