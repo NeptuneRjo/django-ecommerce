@@ -36,7 +36,7 @@ def registration_view(request):
 
 @api_view(['GET', 'PATCH'])
 @permission_classes([IsAuthenticated, ])
-def cart_view(request):
+def user_view(request):
 
     user = request.user
     account = Account.objects.get(user__username=user.username)
