@@ -1,9 +1,24 @@
-from .models import Account
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
+from .models import Account
+from ecommerce_api.serializers import StoreItemSerializer
+
+
+# Converts the User model contained in the Account Model to JSON
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+
 
 class AccountSerializer(serializers.ModelSerializer):
+    # OneToOne
+    user = UserSerializer()
+
+    # Convert OneToOne to ManyToMany
+    account_cart = StoreItemSerializer(many=True)
+
     class Meta:
         model = Account
         fields = ['user', 'account_cart']
@@ -41,9 +56,5 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # create a new user and save
         user.set_password(password)
         user.save()
-
-        # # create a new account, pass user and save
-        # account = Account(user=user)
-        # account.save()
 
         return user
