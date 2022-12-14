@@ -66,6 +66,6 @@ def cart_view(request):
         except StoreItem.DoesNotExist as e:
             data['to_remove_error'] = 'Item(s) do not exist.'
 
-        data['account'] = AccountSerializer(account).data
+    data['account'] = AccountSerializer(account).data
 
     return Response(data)
