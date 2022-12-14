@@ -3,3 +3,10 @@ export interface StoreItem {
 	item_price: number
 	item_thumb_url: string
 }
+
+export interface Account {
+	user: {
+		username: string
+	}
+	account_cart: StoreItem[]
+}
