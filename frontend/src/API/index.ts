@@ -1,3 +1,5 @@
 export { getAccount } from './getAccount'
 export { updateCart } from './updateCart'
 export { getItems } from './getItems'
+export { registerUser } from './registerUser'
+export { loginUser } from './loginUser'
