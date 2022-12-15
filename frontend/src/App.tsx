@@ -45,7 +45,10 @@ function App() {
 					path='/store'
 					element={<Storefront items={items} cart={cart} setCart={setCart} />}
 				/>
-				<Route path='/login' element={<Login setUserToken={setUserToken} />} />
+				<Route
+					path='/login'
+					element={<Login user={user} setUserToken={setUserToken} />}
+				/>
 				<Route path='/register' />
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>
