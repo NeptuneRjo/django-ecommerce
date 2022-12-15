@@ -11,5 +11,12 @@ export const loginUser = async (username: string, password: string) => {
 	)
 	const json = await response.json()
 
-	return json
+	if (response.ok) {
+		return { data: json, error: undefined }
+	} else {
+		return {
+			data: undefined,
+			error: 'Unable to log in with provided credentials.',
+		}
+	}
 }
