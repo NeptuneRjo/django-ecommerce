@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { getItems } from './API'
-import { Account, StoreItem } from './types'
+import { AccountInt, StoreItemInt } from './types'
 
 import './App.css'
 
 function App() {
-	const [items, setItems] = useState<StoreItem[]>([])
+	const [items, setItems] = useState<StoreItemInt[]>([])
 	const [userToken, setUserToken] = useState<string>('')
-	const [user, setUser] = useState<undefined | Account>(undefined)
+	const [user, setUser] = useState<undefined | AccountInt>(undefined)
+	const [cart, setCart] = useState<StoreItemInt[]>([])
 
 	useEffect(() => {
 		;(async () => {

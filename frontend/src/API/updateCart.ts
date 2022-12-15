@@ -1,9 +1,9 @@
-import { StoreItem } from '../types'
+import { StoreItemInt } from '../types'
 
 export const updateCart = async (
 	token: string,
-	toAdd: StoreItem[],
-	toRemove: StoreItem[]
+	toAdd: StoreItemInt[],
+	toRemove: StoreItemInt[]
 ) => {
 	const response: Response = await fetch(
 		'http://localhost:8000/api/store/cart',

@@ -1,8 +1,8 @@
 import React from 'react'
-import { StoreItem } from '../../types'
+import { StoreItemInt } from '../../types'
 
 type Props = {
-	item: StoreItem
+	item: StoreItemInt
 }
 
 const StoreItem: React.FC<Props> = ({ item }: Props) => {

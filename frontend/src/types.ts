@@ -1,12 +1,12 @@
-export interface StoreItem {
+export interface StoreItemInt {
 	item_name: string
 	item_price: number
 	item_thumb_url: string
 }
 
-export interface Account {
+export interface AccountInt {
 	user: {
 		username: string
 	}
-	account_cart: StoreItem[]
+	account_cart: StoreItemInt[]
 }
