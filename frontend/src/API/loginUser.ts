@@ -3,6 +3,10 @@ export const loginUser = async (username: string, password: string) => {
 		'http://localhost:8000/api/accounts/login',
 		{
 			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify({
 				username: username,
 				password: password,

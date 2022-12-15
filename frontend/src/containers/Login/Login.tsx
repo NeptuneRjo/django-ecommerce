@@ -1,31 +1,35 @@
 import React, { useState } from 'react'
 import { loginUser } from '../../API'
-import { AccountInt } from '../../types'
 
 type Props = {
-	setUser: React.Dispatch<React.SetStateAction<AccountInt | undefined>>
+	setUserToken: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Login: React.FC<Props> = ({ setUser }: Props) => {
+const Login: React.FC<Props> = ({ setUserToken }: Props) => {
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [error, setError] = useState<string>('')
 
-	const submitLogin = async () => {
+	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
 		if (username.length >= 1 && password.length >= 1) {
 			const { data, error: errorMessage } = await loginUser(username, password)
 
 			if (errorMessage) {
 				setError(errorMessage)
 			} else {
-				setUser(data)
+				setUserToken(data.token)
+
+				setUsername('')
+				setPassword('')
 			}
 		}
 	}
 
 	return (
 		<div className='login-main'>
-			<form onSubmit={() => submitLogin()}>
+			<form onSubmit={(e) => submitLogin(e)}>
 				<div className='login-section'>
 					<label htmlFor='username'>Enter your username / email:</label>
 					<input
@@ -44,7 +48,7 @@ const Login: React.FC<Props> = ({ setUser }: Props) => {
 						value={password}
 					/>
 				</div>
-				<p className={`error-message ${error ? 'enabled' : ''}`}></p>
+				<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
 				<button type='submit'>Log in</button>
 			</form>
 		</div>
