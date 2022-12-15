@@ -5,11 +5,12 @@ import { StoreItem } from '../../components'
 type Props = {
 	items: StoreItemInt[]
 	cart: StoreItemInt[]
+	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
 }
 
 export const updateUserCart = () => {}
 
-const Storefront: React.FC<Props> = ({ items, cart }: Props) => {
+const Storefront: React.FC<Props> = ({ items, cart, setCart }: Props) => {
 	const [toAdd, setToAdd] = useState<StoreItemInt[]>([])
 	const [toRemove, setToRemove] = useState<StoreItemInt[]>([])
 
