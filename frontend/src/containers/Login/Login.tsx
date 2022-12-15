@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { loginUser } from '../../API'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {
 	setUserToken: React.Dispatch<React.SetStateAction<string>>
@@ -9,6 +10,8 @@ const Login: React.FC<Props> = ({ setUserToken }: Props) => {
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [error, setError] = useState<string>('')
+
+	const navigate = useNavigate()
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -23,6 +26,8 @@ const Login: React.FC<Props> = ({ setUserToken }: Props) => {
 
 				setUsername('')
 				setPassword('')
+
+				navigate('/store')
 			}
 		}
 	}
