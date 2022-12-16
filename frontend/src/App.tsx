@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getItems, getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar, Storefront, Login } from './containers'
+import { Navbar, Storefront, Login, Register } from './containers'
 
 import './App.css'
 
@@ -22,7 +22,7 @@ function App() {
 			}
 
 			// Get user if there is a token present
-			if (userToken.length > 0) {
+			if (userToken) {
 				const { data, error } = await getAccount(userToken)
 
 				setUser(data)
@@ -49,7 +49,10 @@ function App() {
 					path='/login'
 					element={<Login user={user} setUserToken={setUserToken} />}
 				/>
-				<Route path='/register' />
+				<Route
+					path='/register'
+					element={<Register setUserToken={setUserToken} user={user} />}
+				/>
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>
 		</div>
