@@ -26,13 +26,17 @@ function App() {
 				const { data, error } = await getAccount(userToken)
 
 				setUser(data)
+				window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
+				window.sessionStorage.setItem('token', JSON.stringify(userToken))
 			}
 
 			// Set the user if there is one stored in sessionStorage
 			const sessionUser = window.sessionStorage.getItem('loggedUser')
+			const sessionToken = window.sessionStorage.getItem('token')
 
-			if (sessionUser) {
+			if (sessionUser && sessionToken) {
 				setUser(JSON.parse(sessionUser))
+				setUserToken(JSON.parse(sessionToken))
 			}
 		})()
 	}, [userToken])
