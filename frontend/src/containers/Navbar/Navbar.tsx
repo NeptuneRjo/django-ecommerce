@@ -3,9 +3,16 @@ import { AccountInt } from '../../types'
 
 type Props = {
 	user: AccountInt | undefined
+	setUserToken: React.Dispatch<React.SetStateAction<string>>
+	setUser: React.Dispatch<React.SetStateAction<AccountInt | undefined>>
 }
 
-const Navbar: React.FC<Props> = ({ user }) => {
+const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
+	const logout = () => {
+		setUser(undefined)
+		setUserToken('')
+	}
+
 	return (
 		<div className='navbar-main'>
 			<h4 className='title'>
@@ -13,13 +20,21 @@ const Navbar: React.FC<Props> = ({ user }) => {
 			</h4>
 			{user === undefined ? (
 				<div className='navbar-content'>
-					<button>Register</button>
-					<button>Log in</button>
+					<button>
+						<a href='/#/register'>Register</a>
+					</button>
+					<button>
+						<a href='/#/login'>Log in</a>
+					</button>
 				</div>
 			) : (
 				<div className='navbar-content'>
-					<button>Cart</button>
-					<button>Log out</button>
+					<button>
+						<a href='#'>Cart</a>
+					</button>
+					<button onClick={() => logout()}>
+						<a href='#'>Log out</a>
+					</button>
 				</div>
 			)}
 		</div>

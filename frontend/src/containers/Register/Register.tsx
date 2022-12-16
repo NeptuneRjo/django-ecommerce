@@ -43,6 +43,7 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 
 	return (
 		<div className='register-main'>
+			<h4 className='title'>Register</h4>
 			{user === undefined ? (
 				<form onSubmit={(e) => submitForm(e)}>
 					<div className='register-section'>

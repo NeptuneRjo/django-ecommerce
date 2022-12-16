@@ -22,7 +22,7 @@ function App() {
 			}
 
 			// Get user if there is a token present
-			if (userToken) {
+			if (userToken.length > 0) {
 				const { data, error } = await getAccount(userToken)
 
 				setUser(data)
@@ -39,7 +39,7 @@ function App() {
 
 	return (
 		<div className='app-main'>
-			<Navbar user={user} />
+			<Navbar user={user} setUser={setUser} setUserToken={setUserToken} />
 			<Routes>
 				<Route
 					path='/store'

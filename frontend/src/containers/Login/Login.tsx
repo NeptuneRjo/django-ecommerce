@@ -36,6 +36,7 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 
 	return (
 		<div className='login-main'>
+			<h4 className='title'>Log in</h4>
 			{user === undefined ? (
 				<form onSubmit={(e) => submitLogin(e)}>
 					<div className='login-section'>
