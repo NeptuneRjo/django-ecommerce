@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
 import { StoreItemInt } from '../../types'
 import { StoreItem } from '../../components'
+import { updateCart } from '../../API'
 
 type Props = {
 	items: StoreItemInt[]
-	cart: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
+	token: string
 }
 
-export const updateUserCart = () => {}
+const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
+	const [error, setError] = useState<string>('')
 
-const Storefront: React.FC<Props> = ({ items, cart, setCart }: Props) => {
-	const [toAdd, setToAdd] = useState<StoreItemInt[]>([])
-	const [toRemove, setToRemove] = useState<StoreItemInt[]>([])
+	const addToCart = async (index: number) => {
+		const update = [items[index]]
+
+		const { data, errors } = await updateCart(token, update)
+
+		if (errors) {
+			setError(errors.to_add)
+		} else {
+			setCart(data.account.account_cart)
+		}
+	}
 
 	return (
 		<div className='storefront-main'>
@@ -22,9 +32,12 @@ const Storefront: React.FC<Props> = ({ items, cart, setCart }: Props) => {
 				</div>
 			) : (
 				<div className='storefront-grid'>
-					{items.map((item) => (
+					{items.map((item, index) => (
 						<div className='grid-item'>
-							<StoreItem item={item} />
+							<StoreItem item={item} key={index} />
+							{token.length > 1 && (
+								<button onClick={() => addToCart(index)}>Add to cart</button>
+							)}
 						</div>
 					))}
 				</div>

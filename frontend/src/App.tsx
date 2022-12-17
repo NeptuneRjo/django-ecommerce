@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getItems, getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar, Storefront, Login, Register } from './containers'
+import { Navbar, Storefront, Login, Register, Cart } from './containers'
 
 import './App.css'
 
@@ -26,16 +26,24 @@ function App() {
 				const { data, error } = await getAccount(userToken)
 
 				setUser(data)
+				setCart(data.account.account_cart)
 				window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
 				window.sessionStorage.setItem('token', JSON.stringify(userToken))
 			}
 
 			// Set the user if there is one stored in sessionStorage
-			const sessionUser = window.sessionStorage.getItem('loggedUser')
-			const sessionToken = window.sessionStorage.getItem('token')
+			const sessionUser = sessionStorage.getItem('loggedUser')
+			const sessionToken = sessionStorage.getItem('token')
 
-			if (sessionUser && sessionToken) {
-				setUser(JSON.parse(sessionUser))
+			// content of sessionStore is a json string; undefined NEEDS to be a string
+			if (sessionUser !== null && sessionUser !== 'undefined') {
+				const obj = JSON.parse(sessionUser)
+
+				setUser(obj)
+				setCart(obj.account.account_cart)
+			}
+
+			if (sessionToken !== null && sessionToken.length > 0) {
 				setUserToken(JSON.parse(sessionToken))
 			}
 		})()
@@ -47,7 +55,9 @@ function App() {
 			<Routes>
 				<Route
 					path='/store'
-					element={<Storefront items={items} cart={cart} setCart={setCart} />}
+					element={
+						<Storefront items={items} token={userToken} setCart={setCart} />
+					}
 				/>
 				<Route
 					path='/login'
@@ -56,6 +66,10 @@ function App() {
 				<Route
 					path='/register'
 					element={<Register setUserToken={setUserToken} user={user} />}
+				/>
+				<Route
+					path='/cart'
+					element={<Cart cart={cart} setCart={setCart} token={userToken} />}
 				/>
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>

@@ -2,14 +2,16 @@ import { StoreItemInt } from '../types'
 
 export const updateCart = async (
 	token: string,
-	toAdd: StoreItemInt[],
-	toRemove: StoreItemInt[]
+	toAdd: StoreItemInt[] = [],
+	toRemove: StoreItemInt[] = []
 ) => {
 	const response: Response = await fetch(
-		'http://localhost:8000/api/store/cart',
+		'http://localhost:8000/api/accounts/user',
 		{
 			method: 'PATCH',
 			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
 				Authorization: `Token ${token}`,
 			},
 			body: JSON.stringify({
@@ -22,14 +24,14 @@ export const updateCart = async (
 
 	if (!response.ok) {
 		return {
-			data: json?.account,
+			data: undefined,
 			errors: {
 				to_add: json?.to_add_error,
 				to_remove: json?.to_remove_error,
 			},
 		}
 	} else {
-		return { data: json?.account, errors: undefined }
+		return { data: json, errors: undefined }
 	}
 
 	return json

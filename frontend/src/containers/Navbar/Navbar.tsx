@@ -11,6 +11,9 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 	const logout = () => {
 		setUser(undefined)
 		setUserToken('')
+
+		window.sessionStorage.setItem('loggedUser', JSON.stringify(undefined))
+		window.sessionStorage.setItem('token', JSON.stringify(''))
 	}
 
 	return (
@@ -30,10 +33,12 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 			) : (
 				<div className='navbar-content'>
 					<button>
-						<a href='#'>Cart</a>
+						<a href='/#/cart'>Cart</a>
 					</button>
-					<button onClick={() => logout()}>
-						<a href='#'>Log out</a>
+					<button>
+						<a onClick={() => logout()} href='#'>
+							Log out
+						</a>
 					</button>
 				</div>
 			)}
