@@ -44,8 +44,8 @@ const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 			) : (
 				<div className='storefront-grid'>
 					{items.map((item, index) => (
-						<div className='grid-item'>
-							<StoreItem item={item} key={index} />
+						<div className='grid-item' key={index}>
+							<StoreItem item={item} />
 							{token.length > 1 && (
 								<button onClick={() => addToCart(index)}>
 									{addedIndex === index ? `Added to cart` : `Add to cart`}

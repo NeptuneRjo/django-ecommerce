@@ -32,6 +32,7 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 				</div>
 			) : (
 				<div className='navbar-content'>
+					<h6>{user.account.user.username}</h6>
 					<button>
 						<a href='/#/cart'>Cart</a>
 					</button>
