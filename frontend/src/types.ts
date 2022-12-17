@@ -5,8 +5,10 @@ export interface StoreItemInt {
 }
 
 export interface AccountInt {
-	user: {
-		username: string
+	account: {
+		user: {
+			username: string
+		}
+		account_cart: StoreItemInt[]
 	}
-	account_cart: StoreItemInt[]
 }
