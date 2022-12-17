@@ -11,6 +11,15 @@ type Props = {
 
 const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 	const [error, setError] = useState<string>('')
+	const [addedIndex, setAddedIndex] = useState<number | undefined>()
+
+	const updateIndex = (index: number) => {
+		setAddedIndex(index)
+
+		setTimeout(() => {
+			setAddedIndex(undefined)
+		}, 3000)
+	}
 
 	const addToCart = async (index: number) => {
 		const update = [items[index]]
@@ -21,6 +30,8 @@ const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 			setError(errors.to_add)
 		} else {
 			setCart(data.account.account_cart)
+
+			updateIndex(index)
 		}
 	}
 
@@ -36,7 +47,9 @@ const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 						<div className='grid-item'>
 							<StoreItem item={item} key={index} />
 							{token.length > 1 && (
-								<button onClick={() => addToCart(index)}>Add to cart</button>
+								<button onClick={() => addToCart(index)}>
+									{addedIndex === index ? `Added to cart` : `Add to cart`}
+								</button>
 							)}
 						</div>
 					))}
