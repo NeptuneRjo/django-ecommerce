@@ -1,0 +1,33 @@
+#store-main {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex-grow: 1;
+}
+
+#store-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    padding: 10%;
+    height: 100%;
+
+    gap: 1rem;
+    max-width: 2000px;
+}
+
+#grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    flex-grow: 1;
+}
+
+@media screen and (min-width: 1440px) {
+    #store-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}

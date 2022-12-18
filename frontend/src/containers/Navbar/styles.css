@@ -1,0 +1,36 @@
+#nav-main {
+    background-color: var(--jet);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+}
+
+#nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#nav-user {
+    color: var(--medium-turq);
+}
+
+@media screen and (min-width: 1080px) {
+    #nav-title {
+        font-size: 1.3em;
+    }
+
+    #nav-content li {
+        font-size: 1.2em;
+    }
+
+    #nav-main {
+        padding: 3%;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    
+}
