@@ -1,6 +1,8 @@
 import React from 'react'
 import { AccountInt } from '../../types'
 
+import './styles.css'
+
 type Props = {
 	user: AccountInt | undefined
 	setUserToken: React.Dispatch<React.SetStateAction<string>>
@@ -17,33 +19,33 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 	}
 
 	return (
-		<div className='navbar-main'>
-			<h4 className='title'>
+		<nav id='nav-main'>
+			<h4 id='nav-title'>
 				<a href='#/store'>DJANGO GPU's</a>
 			</h4>
-			{user === undefined ? (
-				<div className='navbar-content'>
-					<button>
-						<a href='/#/register'>Register</a>
-					</button>
-					<button>
-						<a href='/#/login'>Log in</a>
-					</button>
-				</div>
+			{!user ? (
+				<ul id='nav-content'>
+					<li>
+						<a href='#/register'>Register</a>
+					</li>
+					<li>
+						<a href='#/login'>Log in</a>
+					</li>
+				</ul>
 			) : (
-				<div className='navbar-content'>
-					<h6>{user.account.user.username}</h6>
-					<button>
-						<a href='/#/cart'>Cart</a>
-					</button>
-					<button>
-						<a onClick={() => logout()} href='#'>
-							Log out
+				<ul id='nav-content'>
+					<li id='nav-user'>{user.account.user.username}</li>
+					<li>
+						<a href='#/cart'>Cart</a>
+					</li>
+					<li>
+						<a href='#' onClick={() => logout()}>
+							Logout
 						</a>
-					</button>
-				</div>
+					</li>
+				</ul>
 			)}
-		</div>
+		</nav>
 	)
 }
 
