@@ -51,14 +51,16 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 						{cart.map((item, index) => (
 							<div className='grid-item' key={index}>
 								<StoreItem item={item} />
-								<button onClick={() => markForRemoval(item)}>
+								<button className='button' onClick={() => markForRemoval(item)}>
 									{toRemove.indexOf(item) > -1 ? `Undo` : `Mark for removal`}
 								</button>
 							</div>
 						))}
 					</div>
 					<div className='cart-controls'>
-						<button onClick={() => removeFromCart()}>Update Cart</button>
+						<button className='button' onClick={() => removeFromCart()}>
+							Update Cart
+						</button>
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
 				</div>

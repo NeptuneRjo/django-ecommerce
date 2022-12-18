@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { AccountInt } from '../../types'
 import { registerUser } from '../../API'
 import { useNavigate } from 'react-router-dom'
+import { Message } from '../../components'
+
+import './styles.css'
 
 type Props = {
 	setUserToken: React.Dispatch<React.SetStateAction<string>>
@@ -42,7 +45,7 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 	}
 
 	return (
-		<div className='register-main'>
+		<div id='register-main'>
 			<h4 className='title'>Register</h4>
 			{user === undefined ? (
 				<form onSubmit={(e) => submitForm(e)}>
@@ -74,14 +77,12 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 						/>
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
-					<button type='submit'>Register</button>
+					<button className='button' type='submit'>
+						Register
+					</button>
 				</form>
 			) : (
-				<div className='message-container'>
-					<p className='message'>You are already signed in.</p>
-					<button>Navigate to the store front</button>
-					<button>View your cart</button>
-				</div>
+				<Message />
 			)}
 		</div>
 	)

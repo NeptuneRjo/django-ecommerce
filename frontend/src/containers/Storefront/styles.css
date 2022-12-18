@@ -19,15 +19,4 @@
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
-
-}
-
-#grid-item button {
-    flex-grow: 1;
-    width: 50%;
-    background-color: var(--jet);
-    border: solid 1px transparent;
-    padding: 4.3px;
-    margin: .5rem 0;
-    color: var(--seashell);
 }

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { loginUser } from '../../API'
 import { useNavigate } from 'react-router-dom'
 import { AccountInt } from '../../types'
+import { Message } from '../../components'
+
+import './styles.css'
 
 type Props = {
 	setUserToken: React.Dispatch<React.SetStateAction<string>>
@@ -35,7 +38,7 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 	}
 
 	return (
-		<div className='login-main'>
+		<div id='login-main'>
 			<h4 className='title'>Log in</h4>
 			{user === undefined ? (
 				<form onSubmit={(e) => submitLogin(e)}>
@@ -58,14 +61,12 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 						/>
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
-					<button type='submit'>Log in</button>
+					<button className='button' type='submit'>
+						Log in
+					</button>
 				</form>
 			) : (
-				<div className='message-container'>
-					<p className='message'>You are already signed in.</p>
-					<button>Navigate to the store front</button>
-					<button>View your cart</button>
-				</div>
+				<Message />
 			)}
 		</div>
 	)
