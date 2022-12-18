@@ -1,7 +1,8 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.authtoken.models import Token
+from rest_framework import status
 
 from ecommerce_api.models import StoreItem
 from .serializers import AccountSerializer, RegistrationSerializer
@@ -11,6 +12,7 @@ from .models import Account
 
 
 @api_view(['POST', ])
+@permission_classes([BasePermission, ])
 def registration_view(request):
     if request.method == 'POST':
         serializer = RegistrationSerializer(data=request.data)
@@ -64,5 +66,8 @@ def user_view(request):
             data['to_remove_error'] = 'Item(s) do not exist.'
 
     data['account'] = AccountSerializer(account).data
+
+    if 'to_remove_error' in data or 'to_add_error' in data:
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(data)

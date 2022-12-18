@@ -8,5 +8,5 @@ app_name = 'accounts'
 urlpatterns = [
     path('register', registration_view, name='register'),
     path('login', obtain_auth_token, name='login'),
-    path('cart', user_view, name='cart'),
+    path('user', user_view, name='user'),
 ]

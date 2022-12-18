@@ -1,0 +1,48 @@
+h4.title {
+    font-size: 1.3em;
+    letter-spacing: 1px;
+
+    margin: 3rem 0;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    list-style: none;
+}
+
+.button {
+    width: 50%;
+    background-color: var(--jet);
+    border: solid 1px transparent;
+    padding: 4.3px;
+    margin: .5rem 0;
+    color: var(--seashell);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+#grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    flex-grow: 1;
+}
+
+@media screen and (min-width: 1080px) {
+    .button {
+        font-size: 1.1em;
+    }
+}
