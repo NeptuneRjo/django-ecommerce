@@ -1,0 +1,18 @@
+#storeitem-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+#storeitem-image {
+    max-width: 100%;
+}
+
+#storeitem-image img {
+    width: 100%;
+}
+
+.name-desktop {
+    display: none;
+}

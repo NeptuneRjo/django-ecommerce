@@ -3,6 +3,8 @@ import { StoreItemInt } from '../../types'
 import { StoreItem } from '../../components'
 import { updateCart } from '../../API'
 
+import './styles.css'
+
 type Props = {
 	items: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
@@ -36,19 +38,19 @@ const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 	}
 
 	return (
-		<div className='storefront-main'>
+		<div id='store-main'>
 			{items.length === 0 ? (
 				<div className='message-container'>
 					<p className='message'>No items in the store right now.</p>
 				</div>
 			) : (
-				<div className='storefront-grid'>
+				<div id='store-grid'>
 					{items.map((item, index) => (
-						<div className='grid-item' key={index}>
+						<div id='grid-item' key={index}>
 							<StoreItem item={item} />
 							{token.length > 1 && (
 								<button onClick={() => addToCart(index)}>
-									{addedIndex === index ? `Added to cart` : `Add to cart`}
+									{addedIndex === index ? '✔' : `Add to cart`}
 								</button>
 							)}
 						</div>
