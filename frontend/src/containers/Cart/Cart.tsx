@@ -3,6 +3,8 @@ import { StoreItemInt } from '../../types'
 import { StoreItem } from '../../components'
 import { updateCart } from '../../API'
 
+import './styles.css'
+
 type Props = {
 	cart: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
@@ -39,17 +41,17 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 	}
 
 	return (
-		<div className='cart-main'>
+		<div id='cart-main'>
 			<h4 className='title'>Cart</h4>
 			{cart.length === 0 ? (
-				<div className='message-container'>
+				<div className='cart-message'>
 					<p className='message'>No items in the store right now.</p>
 				</div>
 			) : (
-				<div className='cart-container'>
-					<div className='cart-grid'>
+				<div id='cart-container'>
+					<div id='cart-grid'>
 						{cart.map((item, index) => (
-							<div className='grid-item' key={index}>
+							<div id='grid-item' key={index}>
 								<StoreItem item={item} />
 								<button className='button' onClick={() => markForRemoval(item)}>
 									{toRemove.indexOf(item) > -1 ? `Undo` : `Mark for removal`}
@@ -57,7 +59,7 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 							</div>
 						))}
 					</div>
-					<div className='cart-controls'>
+					<div id='cart-controls'>
 						<button className='button' onClick={() => removeFromCart()}>
 							Update Cart
 						</button>

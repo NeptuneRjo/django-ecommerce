@@ -32,6 +32,15 @@ li {
     cursor: pointer;
 }
 
+#grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    flex-grow: 1;
+}
+
 @media screen and (min-width: 1080px) {
     .button {
         font-size: 1.1em;

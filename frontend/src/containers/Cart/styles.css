@@ -1,0 +1,39 @@
+#cart-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#cart-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.cart-message {
+    display: flex;
+    flex-direction: column;
+}
+ 
+.message {
+    grid-column: span 2;
+    text-align: center;
+}
+
+#cart-container {
+    max-width: 60%;
+}
+
+#cart-controls {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media screen and (min-width: 1440px) {
+    #cart-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
