@@ -13,10 +13,10 @@ const StoreItem: React.FC<Props> = ({ item }: Props) => {
 			<div id='storeitem-image'>
 				<img alt={item.item_name} src={item.item_thumb_url} />
 			</div>
-			<div className='storeitem-info'>
-				<p className='name-desktop'>{item.item_name}</p>
-				<p className='name-mobile'>{item.item_name.slice(0, 61)}...</p>
-				<p className='price'>${item.item_price}</p>
+			<div id='storeitem-info'>
+				<p id='name-desktop'>{item.item_name}</p>
+				<p id='name-mobile'>{item.item_name.slice(0, 61)}...</p>
+				<p id='price'>${item.item_price}</p>
 			</div>
 		</div>
 	)

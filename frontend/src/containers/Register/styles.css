@@ -18,3 +18,9 @@
     flex-direction: column;
     gap: .5rem;
 }
+
+@media screen and (min-width: 1080px) {
+    #register-main form {
+        max-width: 50%;
+    }
+}

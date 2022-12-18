@@ -17,6 +17,20 @@
     color: var(--medium-turq);
 }
 
-.navbar-title {
-    color: var(--raisin-black);
+@media screen and (min-width: 1080px) {
+    #nav-title {
+        font-size: 1.3em;
+    }
+
+    #nav-content li {
+        font-size: 1.2em;
+    }
+
+    #nav-main {
+        padding: 3%;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    
 }

@@ -18,3 +18,10 @@
     flex-direction: column;
     gap: .5rem;
 }
+
+
+@media screen and (min-width: 1080px) {
+    #login-main form {
+        max-width: 50%;
+    }
+}

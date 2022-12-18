@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 100%;
     align-items: flex-start;
+    flex-grow: 1;
 }
 
 #storeitem-image {
@@ -13,6 +14,24 @@
     width: 100%;
 }
 
-.name-desktop {
+#storeitem-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-grow: 1;
+}
+
+#name-desktop {
     display: none;
+}
+
+@media screen and (min-width: 1080px) {
+   #name-mobile {
+    display: none;
+   } 
+
+   #name-desktop {
+    display: block;
+   }
 }

@@ -20,7 +20,6 @@ li {
 }
 
 .button {
-    flex-grow: 1;
     width: 50%;
     background-color: var(--jet);
     border: solid 1px transparent;
@@ -29,3 +28,12 @@ li {
     color: var(--seashell);
 }
 
+.button:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1080px) {
+    .button {
+        font-size: 1.1em;
+    }
+}
