@@ -52,7 +52,7 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 							<div className='grid-item' key={index}>
 								<StoreItem item={item} />
 								<button onClick={() => markForRemoval(item)}>
-									{toRemove.indexOf(item) > -1 ? `Undo` : `Remove item`}
+									{toRemove.indexOf(item) > -1 ? `Undo` : `Mark for removal`}
 								</button>
 							</div>
 						))}
