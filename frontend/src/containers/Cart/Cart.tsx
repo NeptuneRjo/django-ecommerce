@@ -25,6 +25,19 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 		}
 	}
 
+	const markForRemoval = (item: StoreItemInt) => {
+		const index = toRemove.map((elem) => elem.item_name).indexOf(item.item_name)
+
+		if (index > -1) {
+			const cloneToRemove = toRemove
+			cloneToRemove.splice(index, 1)
+
+			setToRemove([...cloneToRemove])
+		} else {
+			setToRemove([...toRemove, item])
+		}
+	}
+
 	return (
 		<div className='cart-main'>
 			<h4 className='title'>Cart</h4>
@@ -38,8 +51,8 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 						{cart.map((item, index) => (
 							<div className='grid-item' key={index}>
 								<StoreItem item={item} />
-								<button onClick={() => setToRemove([...toRemove, item])}>
-									Remove item
+								<button onClick={() => markForRemoval(item)}>
+									{toRemove.indexOf(item) > -1 ? `Undo` : `Remove item`}
 								</button>
 							</div>
 						))}
