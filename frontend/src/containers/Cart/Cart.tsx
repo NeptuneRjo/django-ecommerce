@@ -45,7 +45,7 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 			<h4 className='title'>Cart</h4>
 			{cart.length === 0 ? (
 				<div className='cart-message'>
-					<p className='message'>No items in the store right now.</p>
+					<p className='message'>No items in your cart right now.</p>
 				</div>
 			) : (
 				<div id='cart-container'>
