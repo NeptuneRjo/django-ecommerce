@@ -56,7 +56,12 @@ function App() {
 				<Route
 					path='/store'
 					element={
-						<Storefront items={items} token={userToken} setCart={setCart} />
+						<Storefront
+							cart={cart}
+							items={items}
+							token={userToken}
+							setCart={setCart}
+						/>
 					}
 				/>
 				<Route

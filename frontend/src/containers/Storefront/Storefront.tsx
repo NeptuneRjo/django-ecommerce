@@ -9,31 +9,35 @@ type Props = {
 	items: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
 	token: string
+	cart: StoreItemInt[]
 }
 
-const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
+const Storefront: React.FC<Props> = ({
+	items,
+	token,
+	setCart,
+	cart,
+}: Props) => {
 	const [error, setError] = useState<string>('')
 	const [addedIndex, setAddedIndex] = useState<number | undefined>()
 
-	const updateIndex = (index: number) => {
-		setAddedIndex(index)
+	const getCartIndex = (item: StoreItemInt) => {
+		const index = cart.map((elem) => elem.item_name).indexOf(item.item_name)
 
-		setTimeout(() => {
-			setAddedIndex(undefined)
-		}, 3000)
+		return index > -1
 	}
 
 	const addToCart = async (index: number) => {
 		const update = [items[index]]
 
-		const { data, errors } = await updateCart(token, update)
+		if (!getCartIndex(items[index])) {
+			const { data, errors } = await updateCart(token, update)
 
-		if (errors) {
-			setError(errors.to_add)
-		} else {
-			setCart(data.account.account_cart)
-
-			updateIndex(index)
+			if (errors) {
+				setError(errors.to_add)
+			} else {
+				setCart(data.account.account_cart)
+			}
 		}
 	}
 
@@ -51,7 +55,7 @@ const Storefront: React.FC<Props> = ({ items, token, setCart }: Props) => {
 
 							{token.length > 1 ? (
 								<button className='button' onClick={() => addToCart(index)}>
-									{addedIndex === index ? '✔' : `Add to cart`}
+									{getCartIndex(item) ? '✔' : `Add to cart`}
 								</button>
 							) : (
 								<button className='button'>
