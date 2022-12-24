@@ -6,8 +6,6 @@ import {
 	registerUser,
 	updateCart,
 } from '../API'
-import { getCartIndex } from '../containers/Storefront/Storefront'
-import { StoreItemInt, AccountInt } from '../types'
 
 const unmockedFetch = global.fetch
 

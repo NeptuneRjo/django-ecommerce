@@ -11,6 +11,27 @@ type Props = {
 	user: AccountInt | undefined
 }
 
+export const validatePasswords = (
+	password1: string,
+	password2: string
+): boolean => {
+	if (password1 !== password2) {
+		return false
+	}
+
+	return true
+}
+
+export const validateInputs = (username: string, password: string): boolean => {
+	if (username.length < 3) {
+		return false
+	} else if (password.length < 6) {
+		return false
+	}
+
+	return true
+}
+
 const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
@@ -22,25 +43,29 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 	const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
-		if (password !== password2) {
+		const passAreValid = validatePasswords(password, password2)
+		if (!passAreValid) {
 			setError('Passwords do not match')
-
 			return
 		}
 
-		if (username.length > 1 && password.length > 1) {
-			const { data, error: responseError } = await registerUser(
-				username,
-				password,
-				password2
-			)
+		const inputsAreValid = validateInputs(username, password)
+		if (!inputsAreValid) {
+			setError('Username or password are invalid')
+			return
+		}
 
-			if (responseError) {
-				setError(responseError)
-			} else {
-				setUserToken(data.token)
-				navigate('/store')
-			}
+		const { data, error: responseError } = await registerUser(
+			username,
+			password,
+			password2
+		)
+
+		if (responseError) {
+			setError(responseError)
+		} else {
+			setUserToken(data.token)
+			navigate('/store')
 		}
 	}
 
