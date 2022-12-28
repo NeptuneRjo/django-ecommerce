@@ -16,6 +16,13 @@
     max-width: 2000px;
 }
 
+.message-container {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    padding: 20% 0;
+}
+
 @media screen and (min-width: 1440px) {
     #store-grid {
         grid-template-columns: repeat(3, 1fr);

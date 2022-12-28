@@ -26,10 +26,14 @@ li {
     padding: 4.3px;
     margin: .5rem 0;
     color: var(--seashell);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+    transition: .17s;
 }
 
 .button:hover {
     cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.45);
 }
 
 #grid-item {

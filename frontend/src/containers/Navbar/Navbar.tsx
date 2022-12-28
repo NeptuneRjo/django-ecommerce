@@ -1,5 +1,6 @@
 import React from 'react'
 import { AccountInt } from '../../types'
+import { RiShoppingCart2Line, RiUser3Line } from 'react-icons/ri'
 
 import './styles.css'
 
@@ -34,11 +35,16 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 				</ul>
 			) : (
 				<ul id='nav-content'>
-					<li id='nav-user'>{user.account.user.username}</li>
-					<li>
-						<a href='#/cart'>Cart</a>
+					<li id='nav-user'>
+						{user.account.user.username} <RiUser3Line />
 					</li>
-					<li>
+					<li id='nav-cart'>
+						<a href='#/cart'>
+							{user?.account.account_cart.length}
+							<RiShoppingCart2Line />
+						</a>
+					</li>
+					<li id='nav-logout'>
 						<a href='#' onClick={() => logout()}>
 							Logout
 						</a>
