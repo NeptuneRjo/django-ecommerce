@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StoreItemInt } from '../../types'
 import { StoreItem } from '../../components'
-import { updateCart } from '../../API'
+import { updateCart, getItems } from '../../API'
 
 import './styles.css'
 
 type Props = {
-	items: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
 	token: string
 	cart: StoreItemInt[]
@@ -18,13 +17,9 @@ export const isItemInCart = (item: StoreItemInt, cart: StoreItemInt[]) => {
 	return index > -1
 }
 
-const Storefront: React.FC<Props> = ({
-	items,
-	token,
-	setCart,
-	cart,
-}: Props) => {
+const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	const [error, setError] = useState<string | undefined>(undefined)
+	const [items, setItems] = useState<StoreItemInt[]>([])
 
 	const addToCart = async (item: StoreItemInt) => {
 		if (!isItemInCart(item, cart)) {
@@ -34,6 +29,16 @@ const Storefront: React.FC<Props> = ({
 			setCart(data.account.account_cart)
 		}
 	}
+
+	useEffect(() => {
+		;(async () => {
+			if (items.length === 0) {
+				const fetchedItems = await getItems()
+
+				setItems(fetchedItems)
+			}
+		})()
+	}, [])
 
 	return (
 		<div id='store-main'>
