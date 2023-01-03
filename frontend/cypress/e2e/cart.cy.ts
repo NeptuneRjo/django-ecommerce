@@ -1,16 +1,18 @@
 import { cli } from 'cypress'
 
-const loginUser = (fixture: string) => {
+export const loginUser = (fixture: string) => {
 	cy.intercept('/api/accounts/user', {
 		fixture: fixture,
 	}).as('User')
 
 	cy.visit('/#/login')
 
-	cy.get('input[name=username]').clear().type('test')
-	cy.get('input[name=password]').clear().type('test')
+	if (cy.url().should('include', '/#/login')) {
+		cy.get('input[name=username]').type('test')
+		cy.get('input[name=password]').type('test')
 
-	cy.get('form button.button').click()
+		cy.get('form button.button').click()
+	}
 }
 
 describe('Cart page', () => {

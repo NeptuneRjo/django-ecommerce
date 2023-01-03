@@ -48,7 +48,7 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 							type='text'
 							name='username'
 							onChange={(e) => setUsername(e.target.value)}
-							value={username}
+							// value={username}
 						/>
 					</div>
 					<div className='login-section'>
@@ -57,7 +57,7 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 							type='password'
 							name='password'
 							onChange={(e) => setPassword(e.target.value)}
-							value={password}
+							// value={password}
 						/>
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>

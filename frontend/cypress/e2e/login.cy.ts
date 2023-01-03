@@ -1,4 +1,5 @@
 import { cli } from 'cypress'
+import { loginUser } from './cart.cy'
 
 describe('Login page', () => {
 	beforeEach(() => {
@@ -39,6 +40,15 @@ describe('Login page', () => {
 			cy.get('input[name=password]')
 				.invoke('attr', 'type')
 				.should('eq', 'password')
+		})
+
+		it('contains the message', () => {
+			loginUser('userFixture.json')
+
+			cy.visit('/#/login')
+
+			cy.get('.message-container > message').should('be.visible')
+			cy.get('.message-contaienrt > .message-buttons').should('be.visible')
 		})
 	})
 
