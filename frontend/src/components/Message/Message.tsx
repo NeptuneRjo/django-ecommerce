@@ -4,11 +4,11 @@ import './styles.css'
 
 const Message = () => {
 	return (
-		<div className='message-container'>
-			<p className='message'>You are already signed in.</p>
-			<div className='message-buttons'>
+		<div id='message-container'>
+			<p id='message'>You are already signed in.</p>
+			<div id='message-buttons'>
 				<button className='button'>
-					<a href='#/store'>Navigate to the store front</a>
+					<a href='#/store'>Navigate to the store</a>
 				</button>
 				<button className='button'>
 					<a href='#/cart'>View your cart</a>

@@ -1,14 +1,16 @@
-.message-container {
+#message-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
  }
  
- .message {
-     grid-column: span 2;
-     text-align: center;
- }
+#message {
+    grid-column: span 2;
+    text-align: center;
+}
  
- .message-buttons {
-     display: flex;
-     gap: 1rem;
- }
+#message-buttons {
+    display: flex;
+    gap: 1rem;
+}
