@@ -5,14 +5,14 @@ databases:
 
 services:
   - type: web
-    name: mysite
+    name: django-ecommerce
     env: python3
-    buildCommand: './build.sh'
+    buildCommand: './backend/build.sh'
     startCommand: 'gunicorn mysite.wsgi:application'
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: djangoecommerce
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
