@@ -43,7 +43,12 @@ function App() {
 
 	return (
 		<div className='app-main'>
-			<Navbar user={user} setUser={setUser} setUserToken={setUserToken} />
+			<Navbar
+				user={user}
+				setUser={setUser}
+				setUserToken={setUserToken}
+				cart={cart}
+			/>
 			<Routes>
 				<Route
 					path='/store'

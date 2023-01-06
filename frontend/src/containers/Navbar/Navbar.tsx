@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccountInt } from '../../types'
+import { AccountInt, StoreItemInt } from '../../types'
 import { RiShoppingCart2Line, RiUser3Line } from 'react-icons/ri'
 
 import './styles.css'
@@ -8,9 +8,10 @@ type Props = {
 	user: AccountInt | undefined
 	setUserToken: React.Dispatch<React.SetStateAction<string>>
 	setUser: React.Dispatch<React.SetStateAction<AccountInt | undefined>>
+	cart: StoreItemInt[]
 }
 
-const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
+const Navbar: React.FC<Props> = ({ user, setUser, setUserToken, cart }) => {
 	const logout = () => {
 		setUser(undefined)
 		setUserToken('')
@@ -40,7 +41,7 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken }) => {
 					</li>
 					<li id='nav-cart'>
 						<a href='#/cart'>
-							{user?.account.account_cart.length}
+							{cart.length}
 							<RiShoppingCart2Line />
 						</a>
 					</li>
