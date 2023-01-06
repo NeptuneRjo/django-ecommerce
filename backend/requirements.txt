@@ -2,3 +2,4 @@ Django==3.2.6
 djangorestframework==3.14.0
 python-dotenv==0.21.0
 gunicorn==20.1.0
+djangocorsheaders==3.13.0
