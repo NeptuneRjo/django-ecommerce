@@ -6,7 +6,7 @@ You can visit [here](https://neptunerjo.github.io/django-ecommerce)
 
 ## Demo
 
-[Demo](./demo.gif)
+![Demo](./demo.gif)
 
 ## Reflection
 
