@@ -1,6 +1,6 @@
 export const getItems = async () => {
 	const response: Response = await fetch(
-		'http://localhost:8000/api/store/items'
+		`${process.env.REACT_APP_API_URL}/api/store/items`
 	)
 	const json = await response.json()
 

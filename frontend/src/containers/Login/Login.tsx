@@ -3,6 +3,7 @@ import { loginUser } from '../../API'
 import { useNavigate } from 'react-router-dom'
 import { AccountInt } from '../../types'
 import { Message } from '../../components'
+import { BeatLoader } from 'react-spinners'
 
 import './styles.css'
 
@@ -15,11 +16,13 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [error, setError] = useState<string>('')
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const navigate = useNavigate()
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		setLoading(true)
 
 		if (username.length >= 1 && password.length >= 1) {
 			const { data, error: errorMessage } = await loginUser(username, password)
@@ -32,6 +35,7 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 				setUsername('')
 				setPassword('')
 
+				setLoading(false)
 				navigate('/store')
 			}
 		}
@@ -57,8 +61,10 @@ const Login: React.FC<Props> = ({ user, setUserToken }: Props) => {
 							name='password'
 							onChange={(e) => setPassword(e.target.value)}
 						/>
+						{loading && <BeatLoader color='#63ccca' size={10} />}
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
+
 					<button className='button' type='submit'>
 						Log in
 					</button>

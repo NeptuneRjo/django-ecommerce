@@ -21,6 +21,7 @@
     height: 100%;
     flex-grow: 1;
     padding: 20% 0;
+    justify-content: center;
 }
 
 @media screen and (min-width: 1440px) {

@@ -3,6 +3,7 @@ import { AccountInt } from '../../types'
 import { registerUser } from '../../API'
 import { useNavigate } from 'react-router-dom'
 import { Message } from '../../components'
+import { BeatLoader } from 'react-spinners'
 
 import './styles.css'
 
@@ -37,11 +38,13 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 	const [password, setPassword] = useState<string>('')
 	const [password2, setPassword2] = useState<string>('')
 	const [error, setError] = useState<string>('')
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const navigate = useNavigate()
 
 	const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		setLoading(true)
 
 		const passAreValid = validatePasswords(password, password2)
 		if (!passAreValid) {
@@ -100,6 +103,7 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 							onChange={(e) => setPassword2(e.target.value)}
 							value={password2}
 						/>
+						{loading && <BeatLoader color='#63ccca' size={10} />}
 					</div>
 					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
 					<button className='button' type='submit'>

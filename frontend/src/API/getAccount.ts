@@ -1,6 +1,6 @@
 export const getAccount = async (token: string) => {
 	const response: Response = await fetch(
-		'http://localhost:8000/api/accounts/user',
+		`${process.env.REACT_APP_API_URL}/api/accounts/user`,
 		{
 			method: 'GET',
 			headers: {

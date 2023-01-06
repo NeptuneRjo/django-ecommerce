@@ -1,6 +1,6 @@
 export const loginUser = async (username: string, password: string) => {
 	const response: Response = await fetch(
-		'http://localhost:8000/api/accounts/login',
+		`${process.env.REACT_APP_API_URL}/api/accounts/login`,
 		{
 			method: 'POST',
 			headers: {

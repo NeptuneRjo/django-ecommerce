@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StoreItemInt } from '../../types'
 import { StoreItem } from '../../components'
 import { updateCart, getItems } from '../../API'
+import { PropagateLoader } from 'react-spinners'
 
 import './styles.css'
 
@@ -20,6 +21,7 @@ export const isItemInCart = (item: StoreItemInt, cart: StoreItemInt[]) => {
 const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [items, setItems] = useState<StoreItemInt[]>([])
+	const [loading, setLoading] = useState<boolean>(true)
 
 	const addToCart = async (item: StoreItemInt) => {
 		if (!isItemInCart(item, cart)) {
@@ -36,6 +38,7 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 				const fetchedItems = await getItems()
 
 				setItems(fetchedItems)
+				setLoading(false)
 			}
 		})()
 	}, [])
@@ -44,7 +47,13 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 		<div id='store-main'>
 			{items.length === 0 ? (
 				<div className='message-container'>
-					<p className='message'>No items in the store right now.</p>
+					<p className='message'>
+						{loading ? (
+							<PropagateLoader color='#63ccca' />
+						) : (
+							<>No items in the store right now.</>
+						)}
+					</p>
 				</div>
 			) : (
 				<div id='store-grid'>
