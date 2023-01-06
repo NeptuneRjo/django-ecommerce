@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/django-ecommerce/static/css/main.1755836a.css",
+    "main.js": "/django-ecommerce/static/js/main.1d1998a4.js",
+    "index.html": "/django-ecommerce/index.html",
+    "main.1755836a.css.map": "/django-ecommerce/static/css/main.1755836a.css.map",
+    "main.1d1998a4.js.map": "/django-ecommerce/static/js/main.1d1998a4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1755836a.css",
+    "static/js/main.1d1998a4.js"
+  ]
+}
