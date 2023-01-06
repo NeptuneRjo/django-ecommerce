@@ -6,7 +6,7 @@ databases:
 services:
   - type: web
     name: django-ecommerce
-    env: python3
+    env: python
     buildCommand: './backend/build.sh'
     startCommand: 'gunicorn mysite.wsgi:application'
     envVars:
