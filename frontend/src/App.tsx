@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar, Storefront, Login, Register, Cart } from './containers'
+import { Navbar, Storefront, Login, Register, Cart, About } from './containers'
 
 import './App.css'
 
@@ -10,6 +10,10 @@ function App() {
 	const [userToken, setUserToken] = useState<string>('')
 	const [user, setUser] = useState<undefined | AccountInt>(undefined)
 	const [cart, setCart] = useState<StoreItemInt[]>([])
+
+	// fetch('https://fakestoreapi.com/products')
+	// 	.then((res) => res.json())
+	// 	.then((json) => console.log(json))
 
 	useEffect(() => {
 		;(async () => {
@@ -68,6 +72,7 @@ function App() {
 					path='/cart'
 					element={<Cart cart={cart} setCart={setCart} token={userToken} />}
 				/>
+				<Route path='/about' element={<About />} />
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>
 		</div>
