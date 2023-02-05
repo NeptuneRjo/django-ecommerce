@@ -41,8 +41,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     line-height: 95%;
-    /* color: var(--black); */
-    max-width: 72ch;
+    max-width: 28ch;
 }
 
 h1 {
@@ -55,14 +54,12 @@ h2 {
 
 h3 {
     font-size: var(--fs-4);
-    margin: var(--spacer) 0;
 }
 
 p {
     font-size: var(--fs-p);
     line-height: 38px;
-    /* color: var(--black); */
-    max-width: 54ch;
+    max-width: 38ch;
     font-weight: var(--fw-n);
 }
 
@@ -70,4 +67,50 @@ p {
     background: var(--dark) !important;
     color: var(--light) !important;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (min-width: 600px) {
+    :root {
+        --spacer: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    :root {
+         /* Font-size */
+        --fs-2: 3.5rem;
+        --fs-3: 3rem;
+        --fs-4: 2.35rem;
+        --fs-p: 1.1rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    :root {
+        --spacer: 2rem;
+    }
+} 
+
+@media only screen and (min-width: 1200px) {
+    :root {
+        --spacer: 2.25rem;
+
+        /* Font-size */
+        --fs-2: 3.75rem;
+        --fs-3: 3.25rem;
+        --fs-4: 2.5rem;
+        --fs-p: 1.2rem;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    :root {
+        --spacer: 5rem;
+
+        --fs-p: 1.5rem;
+    }
+
+    p {
+        max-width: 58ch;
+    }
 }
