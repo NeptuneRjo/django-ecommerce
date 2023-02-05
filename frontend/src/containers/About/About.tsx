@@ -14,21 +14,21 @@ const About = () => {
 				</p>
 			</div>
 			<div className='about__banner bg-dark'>
-				<div className='about__banner row'>
-					<h3>Reliabe</h3>
+				<div className='about__banner__row'>
+					<h3>Reliable</h3>
 					<p>
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt,
 						quaerat nulla.
 					</p>
 				</div>
-				<div className='about__banner row'>
+				<div className='about__banner__row'>
 					<h3>Fast</h3>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 						eiusmod tempor incididunt ut labore et dolore magna aliqua.
 					</p>
 				</div>
-				<div className='about__banner row'>
+				<div className='about__banner__row'>
 					<h3>Cheap</h3>
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
