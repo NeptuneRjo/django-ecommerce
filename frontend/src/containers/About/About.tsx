@@ -5,13 +5,15 @@ const About = () => {
 	return (
 		<div className='about'>
 			<div className='about__section'>
-				<h1>A web store for all your needs</h1>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-					odit officiis minima ipsum quis voluptatem nulla et perferendis fuga
-					delectus nemo, neque ipsa nesciunt voluptatibus veritatis tempora esse
-					maiores eius.
-				</p>
+				<div className='about__section__text'>
+					<h1>A web store for all your needs</h1>
+					<p>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+						odit officiis minima ipsum quis voluptatem nulla et perferendis fuga
+						delectus nemo, neque ipsa nesciunt voluptatibus veritatis tempora
+						esse maiores eius.
+					</p>
+				</div>
 			</div>
 			<div className='about__banner bg-dark'>
 				<div className='about__banner__row'>
@@ -37,19 +39,22 @@ const About = () => {
 				</div>
 			</div>
 			<div className='about__section'>
-				<h2>Some more about our very special web store</h2>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-					aliquip ex ea commodo consequat.
-				</p>
-				<p>
-					Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-					dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est
-					laborum.
-				</p>
+				<div className='about__section__text'>
+					<h2>Some more about our very special web store</h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+						ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+						aliquip ex ea commodo consequat.
+					</p>
+					<p>
+						Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+						cupidatat non proident, sunt in culpa qui officia deserunt mollit
+						anim id est laborum.
+					</p>
+				</div>
+				<img src='https://unsplash.it/640/425' alt='placeholder' />
 			</div>
 		</div>
 	)
