@@ -21,36 +21,50 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken, cart }) => {
 	}
 
 	return (
-		<nav id='nav-main'>
-			<h4 id='nav-title'>
-				<a href='#/store'>DJANGO GPU's</a>
-			</h4>
+		<nav className='nav'>
+			<h3>
+				<a href='#/store'>Graphics Galaxy</a>
+			</h3>
 			{!user ? (
-				<ul id='nav-content'>
-					<li>
-						<a href='#/register'>Register</a>
-					</li>
-					<li>
-						<a href='#/login'>Log in</a>
-					</li>
-				</ul>
+				<div className='nav__content'>
+					<ul className='nav__content__links'>
+						<li>
+							<a href='#/store'>Store</a>
+						</li>
+						<li>
+							<a href='#/about'>About</a>
+						</li>
+					</ul>
+					<ul className='nav__content__buttons'>
+						<li>
+							<a href='#/login'>Login</a>
+						</li>
+						<li className='button__1'>
+							<a href='#/register'>Register</a>
+						</li>
+					</ul>
+				</div>
 			) : (
-				<ul id='nav-content'>
-					<li id='nav-user'>
-						{user.account.user.username} <RiUser3Line />
-					</li>
-					<li id='nav-cart'>
-						<a href='#/cart'>
-							{cart.length}
-							<RiShoppingCart2Line />
-						</a>
-					</li>
-					<li id='nav-logout'>
-						<a href='#' onClick={() => logout()}>
-							Logout
-						</a>
-					</li>
-				</ul>
+				<div className='nav__content'>
+					<ul className='nav__content__links'>
+						<li className='nav--focus'>
+							{user.account.user.username} <RiUser3Line />
+						</li>
+					</ul>
+					<ul className='nav__content__buttons'>
+						<li>
+							<a href='#/cart'>
+								{cart.length}
+								<RiShoppingCart2Line />
+							</a>
+						</li>
+						<li>
+							<a href='#' onClick={() => logout()}>
+								Logout
+							</a>
+						</li>
+					</ul>
+				</div>
 			)}
 		</nav>
 	)
