@@ -54,7 +54,6 @@ const About = () => {
 						anim id est laborum.
 					</p>
 				</div>
-				<img src='https://unsplash.it/640/425' alt='placeholder' />
 			</div>
 		</div>
 	)
