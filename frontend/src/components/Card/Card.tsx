@@ -36,7 +36,7 @@ const Card: React.FC<Props> = ({ props }: Props) => {
 							<motion.p className='card__rating'>{item_rating} / 5 ★</motion.p>
 						</motion.li>
 					</motion.ul>
-					<motion.button>Add</motion.button>
+					<motion.button className='button__2'>Add to Cart</motion.button>
 				</motion.div>
 			</motion.div>
 		</motion.div>
