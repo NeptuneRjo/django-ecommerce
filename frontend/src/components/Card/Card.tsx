@@ -9,11 +9,12 @@ type Props = {
 		key: number
 		setIndex: React.Dispatch<React.SetStateAction<string | boolean>>
 		index: string | boolean
+		addToCart: (item: StoreItemInt) => void
 	}
 }
 
 const Card: React.FC<Props> = ({ props }: Props) => {
-	const { item, key, setIndex, index } = props
+	const { item, key, setIndex, index, addToCart } = props
 	const { item_id, item_title, item_image_url, item_price, item_rating } = item
 
 	return (
@@ -36,7 +37,9 @@ const Card: React.FC<Props> = ({ props }: Props) => {
 							<motion.p className='card__rating'>{item_rating} / 5 ★</motion.p>
 						</motion.li>
 					</motion.ul>
-					<motion.button className='button__2'>Add to Cart</motion.button>
+					<motion.button className='button__2' onClick={() => addToCart(item)}>
+						Add to Cart
+					</motion.button>
 				</motion.div>
 			</motion.div>
 		</motion.div>
