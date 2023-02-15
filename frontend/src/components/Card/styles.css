@@ -1,5 +1,5 @@
 .card {
-    height: 500px;
+    min-height: fit-content;
     background-color: white;
     padding: calc(var(--spacer) / 3.5);
 }
@@ -27,7 +27,6 @@
     height: 50%;
     display: flex;
     flex-direction: column;
-
 }
 
 .card__container__cmpnts ul {
