@@ -15,13 +15,13 @@ type Props = {
 
 const Card: React.FC<Props> = ({ props }: Props) => {
 	const { item, key, setIndex, index, addToCart } = props
-	const { item_id, item_title, item_image_url, item_price, item_rating } = item
+	const { item_title, item_image_url, item_price, item_rating } = item
 
 	return (
 		<motion.div
-			layoutId={item_id}
+			layoutId={`${key}`}
 			key={key}
-			onClick={() => index === false && setIndex(item_id)}
+			onClick={() => index === false && setIndex(item_title)}
 			className='card'
 		>
 			<motion.div className='card__container'>
