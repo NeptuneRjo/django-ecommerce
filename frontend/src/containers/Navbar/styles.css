@@ -5,6 +5,7 @@
     align-items: center;
     gap: var(--spacer-md);
     padding: var(--spacer-md);
+    background-color: var(--light);
 }
 
 .nav > h3 {
