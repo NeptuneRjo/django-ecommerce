@@ -28,7 +28,7 @@
     --spacer-lg: calc(var(--spacer) * 3);
 
     /* -- Misc -- */
-    --shadow: 00 1rem rgba(0, 0, 0, .25);
+    --shadow: 0 0 1rem rgba(0, 0, 0, .25);
     --br: 8px;
 }
 
@@ -90,6 +90,10 @@ li {
     border: 1px solid var(--dark);
     border-radius: 15px;
     padding: 8px;
+}
+
+.card-open {
+    overflow: hidden;
 }
 
 @media only screen and (min-width: 600px) {
