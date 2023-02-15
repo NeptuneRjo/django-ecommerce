@@ -55,3 +55,9 @@
     cursor: pointer;
     color: var(--dark);
 }
+
+@media only screen and (min-width: 1600px) {
+    .card-expanded__container {
+        padding: 0 var(--spacer);
+    }
+}
