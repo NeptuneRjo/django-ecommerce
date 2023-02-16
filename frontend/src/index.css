@@ -92,6 +92,18 @@ li {
     padding: 8px;
 }
 
+.button__2 {
+    box-sizing: content-box;
+    background-color: var(--primary);
+    border: solid 1px var(--primary);
+    padding: var(--br);
+    width: 100%;
+    color: var(--light);
+    font-weight: var(--fw-sb);
+    box-sizing: border-box;
+    margin: 8px 0;
+}
+
 .card-open {
     overflow: hidden;
 }
