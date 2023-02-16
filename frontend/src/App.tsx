@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar, Storefront, Login, Register, Cart, About } from './containers'
+import {
+	Navbar,
+	Storefront,
+	Login,
+	Register,
+	Cart,
+	About,
+	Footer,
+} from './containers'
 
 import './App.css'
 
@@ -71,6 +79,7 @@ function App() {
 				<Route path='/about' element={<About />} />
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>
+			<Footer />
 		</div>
 	)
 }
