@@ -27,6 +27,7 @@
     height: 50%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .card__container__cmpnts ul {
@@ -36,7 +37,7 @@
     padding: 0;
     flex-grow: 1;
     margin: 0;
-
+    width: 100%;
 }
 
 .card__container__cmpnts li > p {
