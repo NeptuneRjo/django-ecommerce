@@ -23,7 +23,7 @@ const Navbar: React.FC<Props> = ({ user, setUser, setUserToken, cart }) => {
 	return (
 		<nav className='nav'>
 			<h3>
-				<a href='#/store'>Graphics Galaxy</a>
+				<a href='#/store'>BargainBay</a>
 			</h3>
 			{!user ? (
 				<div className='nav__content'>
