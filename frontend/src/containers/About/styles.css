@@ -1,8 +1,9 @@
 .about {
     display: flex;
     flex-direction: column;
-    margin: var(--spacer-lg) 0;
+    padding: var(--spacer-lg) 0;
     gap: 5rem;
+    background-color: var(--light);
 }
 
 .about__section {
@@ -52,7 +53,7 @@
 
 @media only screen and (min-width: 1600px) {
     .about {
-        margin: var(--spacer-md) 0;
+        padding: var(--spacer) 0;
         gap: 8rem;
     }
 
