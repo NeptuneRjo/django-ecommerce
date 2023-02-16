@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { StoreItemInt } from '../../types'
-import { StoreItem } from '../../components'
 import { updateCart } from '../../API'
 
 import './styles.css'
@@ -28,7 +27,9 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 	}
 
 	const markForRemoval = (item: StoreItemInt) => {
-		const index = toRemove.map((elem) => elem.item_name).indexOf(item.item_name)
+		const index = toRemove
+			.map((elem) => elem.item_title)
+			.indexOf(item.item_title)
 
 		if (index > -1) {
 			const cloneToRemove = toRemove
@@ -52,7 +53,7 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 					<div id='cart-grid'>
 						{cart.map((item, index) => (
 							<div id='grid-item' key={index}>
-								<StoreItem item={item} />
+								{/* <StoreItem item={item} /> */}
 								<button className='button' onClick={() => markForRemoval(item)}>
 									{toRemove.indexOf(item) > -1 ? `Undo` : `Mark for removal`}
 								</button>

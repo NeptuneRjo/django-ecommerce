@@ -11,10 +11,6 @@ function App() {
 	const [user, setUser] = useState<undefined | AccountInt>(undefined)
 	const [cart, setCart] = useState<StoreItemInt[]>([])
 
-	// fetch('https://fakestoreapi.com/products')
-	// 	.then((res) => res.json())
-	// 	.then((json) => console.log(json))
-
 	useEffect(() => {
 		;(async () => {
 			// Get user if there is a token present
