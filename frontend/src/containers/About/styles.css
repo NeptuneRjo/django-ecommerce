@@ -4,6 +4,7 @@
     padding: var(--spacer-lg) 0;
     gap: 5rem;
     background-color: var(--light);
+    padding-bottom: calc(var(--spacer-lg) * 3);
 }
 
 .about__section {
