@@ -56,6 +56,10 @@ h3 {
     font-size: var(--fs-4);
 }
 
+h4 {
+    font-size: calc(var(--fs-4) * .5)
+}
+
 p {
     font-size: var(--fs-p);
     line-height: 38px;
