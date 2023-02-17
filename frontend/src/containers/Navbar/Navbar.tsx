@@ -55,26 +55,16 @@ const Navbar: React.FC<Props> = ({ props }) => {
 					</li>
 				</ul>
 				{user ? (
-					<div className='nav__content'>
-						<ul className='nav__content__links'>
-							<li className='nav--focus'>
-								{user.account.user.username} <RiUser3Line />
-							</li>
-						</ul>
-						<ul className='nav__content__buttons'>
-							<li>
-								<a href='#/cart'>
-									{cart.length}
-									<RiShoppingCart2Line />
-								</a>
-							</li>
-							<li>
-								<a href='#' onClick={() => logout()}>
-									Logout
-								</a>
-							</li>
-						</ul>
-					</div>
+					<ul className='nav__content__buttons'>
+						<li className='nav__content-cart' data-content={cart.length}>
+							<a href='#/cart'>Cart</a>
+						</li>
+						<li>
+							<a href='#' onClick={() => logout()}>
+								Logout
+							</a>
+						</li>
+					</ul>
 				) : (
 					<ul className='nav__content__buttons'>
 						<li>

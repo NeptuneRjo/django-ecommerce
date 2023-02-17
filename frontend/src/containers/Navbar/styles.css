@@ -35,6 +35,18 @@
     justify-content: flex-end;
 }
 
+.nav__content-cart {
+    display: flex;
+    gap: 4px;
+}
+
+.nav__content-cart::before {
+    content: attr(data-content);
+    color: var(--primary);
+    font-weight: var(--fw-sb);
+    
+}
+
 @media only screen and (min-width: 768px) {
     .nav {
         gap: var(--spacer);
