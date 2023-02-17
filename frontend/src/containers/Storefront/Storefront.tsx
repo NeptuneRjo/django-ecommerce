@@ -59,10 +59,10 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 
 	return (
 		<div className='store'>
-			{items.length > 0 ? (
+			{items.length === 0 ? (
 				<div className='message'>
 					<div className='message__content'>
-						{loading === false ? (
+						{loading ? (
 							<PropagateLoader color='#574ae2' />
 						) : (
 							<p>No items in the store right now.</p>
