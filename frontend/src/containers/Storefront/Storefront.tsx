@@ -58,20 +58,20 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	}
 
 	return (
-		<div id='store-main'>
-			{items.length === 0 ? (
-				<div className='message-container'>
-					<p className='message'>
-						{loading ? (
-							<PropagateLoader color='#63ccca' />
+		<div className='store'>
+			{items.length > 0 ? (
+				<div className='message'>
+					<div className='message__content'>
+						{loading === false ? (
+							<PropagateLoader color='#574ae2' />
 						) : (
-							<>No items in the store right now.</>
+							<p>No items in the store right now.</p>
 						)}
-					</p>
+					</div>
 				</div>
 			) : (
 				<LayoutGroup>
-					<div id='store-grid'>
+					<div className='store__grid'>
 						{items.map((item, key) => (
 							<Card props={{ addToCart, item, key, index, setIndex }} />
 						))}
