@@ -94,6 +94,7 @@ li {
     border: 1px solid var(--dark);
     border-radius: 15px;
     padding: 8px;
+    background-color: transparent;
 }
 
 .button__2 {
@@ -108,7 +109,7 @@ li {
     margin: 8px 0;
 }
 
-.card-open {
+.modal-open {
     overflow: hidden;
 }
 
