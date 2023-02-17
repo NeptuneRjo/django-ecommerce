@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { StoreItemInt } from '../../types'
 import './styles.css'
-import CardBackdrop from '../CardBackdrop/CardBackdrop'
+import CardBackdrop from '../ModalBackdrop/ModalBackdrop'
 
 type Props = {
 	props: {
