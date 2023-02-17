@@ -52,9 +52,9 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	}, [])
 
 	if (item) {
-		document.body.classList.add('card-open')
+		document.body.classList.add('modal-open')
 	} else {
-		document.body.classList.remove('card-open')
+		document.body.classList.remove('modal-open')
 	}
 
 	return (
