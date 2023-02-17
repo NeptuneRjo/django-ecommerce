@@ -2,15 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import {
-	Navbar,
-	Storefront,
-	Login,
-	Register,
-	Cart,
-	About,
-	Footer,
-} from './containers'
+import { Navbar, Storefront, Cart, About, Footer } from './containers'
 
 import './App.css'
 
@@ -63,14 +55,6 @@ function App() {
 					element={
 						<Storefront cart={cart} token={userToken} setCart={setCart} />
 					}
-				/>
-				<Route
-					path='/login'
-					element={<Login user={user} setUserToken={setUserToken} />}
-				/>
-				<Route
-					path='/register'
-					element={<Register setUserToken={setUserToken} user={user} />}
 				/>
 				<Route
 					path='/cart'
