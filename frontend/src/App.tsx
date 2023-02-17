@@ -43,12 +43,7 @@ function App() {
 
 	return (
 		<div className='app-main'>
-			<Navbar
-				user={user}
-				setUser={setUser}
-				setUserToken={setUserToken}
-				cart={cart}
-			/>
+			<Navbar props={{ user, setUser, setUserToken, cart }} />
 			<Routes>
 				<Route
 					path='/store'
