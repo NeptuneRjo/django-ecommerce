@@ -1,5 +1,7 @@
 export { default as Message } from './Message/Message'
 export { default as Card } from './Card/Card'
 export { default as CardExpanded } from './CardExpanded/CardExpanded'
-export { default as CardBackdrop } from './CardBackdrop/CardBackdrop'
+export { default as ModalBackdrop } from './ModalBackdrop/ModalBackdrop'
 export { default as ScrollToTop } from './ScrollToTop/ScrollToTop'
+export { default as Login } from './Login/Login'
+export { default as Register } from './Register/Register'
