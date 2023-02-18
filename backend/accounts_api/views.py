@@ -71,3 +71,53 @@ def user_view(request):
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(data)
+
+
+@api_view(['PATCH', ])
+@permission_classes([IsAuthenticated, ])
+def add_to_cart(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+
+    data = {}
+
+    if request.method == 'PATCH':
+        try:
+            item = request.data
+            item_to_add = StoreItem.objects.get(item_name=item['item_name'])
+            account.account_cart.add(item_to_add)
+        except StoreItem.DoesNotExist as error:
+            data['error'] = 'Item does not exist'
+        except:
+            data['error'] = 'An error has occured'
+
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            data['account'] = AccountSerializer(account).data
+            return Response(data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes([IsAuthenticated, ])
+def remove_from_cart(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+
+    data = {}
+
+    if request.method == 'PATCH':
+        try:
+            item = request.data
+            item_to_remove = StoreItem.objects.get(item_name=item['item_name'])
+            account.account.cart.remove(item_to_remove)
+        except StoreItem.DoesNotExist as error:
+            data['error'] = 'Item does not exist'
+        except:
+            data['error'] = 'An error has occured'
+
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            data['account'] = AccountSerializer(account).data
+            return Response(data, status=status.HTTP_200_OK)
