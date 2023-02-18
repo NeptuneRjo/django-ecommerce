@@ -40,11 +40,8 @@
     gap: 4px;
 }
 
-.nav__content-cart::before {
-    content: attr(data-content);
-    color: var(--primary);
-    font-weight: var(--fw-sb);
-    
+.nav li {
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {
