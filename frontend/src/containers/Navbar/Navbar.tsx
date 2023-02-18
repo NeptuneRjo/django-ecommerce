@@ -56,13 +56,14 @@ const Navbar: React.FC<Props> = ({ props }) => {
 				</ul>
 				{user ? (
 					<ul className='nav__content__buttons'>
-						<li className='nav__content-cart' data-content={cart.length}>
+						<li>
+							<a>{user.account.user.username}</a>
+						</li>
+						<li>
 							<a href='#/cart'>Cart</a>
 						</li>
 						<li>
-							<a href='#' onClick={() => logout()}>
-								Logout
-							</a>
+							<a onClick={() => logout()}>Logout</a>
 						</li>
 					</ul>
 				) : (
@@ -85,13 +86,13 @@ const Navbar: React.FC<Props> = ({ props }) => {
 			<AnimatePresence>
 				{index === 'login' && (
 					<>
-						<Login props={{ setUserToken, handleClose, user }} />
+						<Login props={{ setUserToken, handleClose }} />
 						<ModalBackdrop handleClose={handleClose} />
 					</>
 				)}
 				{index === 'register' && (
 					<>
-						<Register setUserToken={setUserToken} user={user} />
+						<Register props={{ setUserToken, handleClose }} />
 						<ModalBackdrop handleClose={handleClose} />
 					</>
 				)}
