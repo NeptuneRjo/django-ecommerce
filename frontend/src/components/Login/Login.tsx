@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
 import { loginUser } from '../../API'
-import { useNavigate } from 'react-router-dom'
-import { AccountInt } from '../../types'
-import { Message } from '..'
 import { BeatLoader } from 'react-spinners'
 import { motion } from 'framer-motion'
 
@@ -11,20 +8,17 @@ import './styles.css'
 type Props = {
 	props: {
 		setUserToken: React.Dispatch<React.SetStateAction<string>>
-		user: AccountInt | undefined
 		handleClose: () => void
 	}
 }
 
 const Login: React.FC<Props> = ({ props }: Props) => {
-	const { user, setUserToken, handleClose } = props
+	const { setUserToken, handleClose } = props
 
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [error, setError] = useState<string>('')
 	const [loading, setLoading] = useState<boolean>(false)
-
-	const navigate = useNavigate()
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -39,7 +33,6 @@ const Login: React.FC<Props> = ({ props }: Props) => {
 			} else {
 				handleClose()
 				setUserToken(data.token)
-				console.log(data)
 
 				setUsername('')
 				setPassword('')
@@ -48,8 +41,6 @@ const Login: React.FC<Props> = ({ props }: Props) => {
 			}
 		}
 	}
-
-	console.log(user)
 
 	return (
 		<motion.div className='login' key='modal'>
