@@ -7,24 +7,34 @@ type Props = {
 	props: {
 		item: StoreItemInt
 		key: number
+	}
+	motionProps?: {
 		setIndex: React.Dispatch<React.SetStateAction<string | boolean>>
 		index: string | boolean
-		addToCart: (item: StoreItemInt) => void
 	}
+	addItem?: (index: number) => Promise<void> | undefined
+	removeItem?: (index: number) => Promise<void> | undefined
 }
 
-const Card: React.FC<Props> = ({ props }: Props) => {
-	const { item, key, setIndex, index, addToCart } = props
+const Card: React.FC<Props> = ({
+	props,
+	motionProps = undefined,
+	addItem = undefined,
+	removeItem = undefined,
+}: Props) => {
+	const { item, key } = props
 	const { item_title, item_image_url, item_price, item_rating } = item
 
 	return (
-		<motion.div
-			layoutId={`${key}`}
-			key={key}
-			onClick={() => index === false && setIndex(item_title)}
-			className='card'
-		>
-			<motion.div className='card__container'>
+		<motion.div className='card'>
+			<motion.div
+				className='card__container'
+				layoutId={`${key}`}
+				key={key}
+				onClick={() =>
+					motionProps?.index === false && motionProps.setIndex(item_title)
+				}
+			>
 				<motion.img src={`${item_image_url}`} alt={`${item_title}`} />
 
 				<motion.div className='card__container__cmpnts'>
@@ -37,11 +47,18 @@ const Card: React.FC<Props> = ({ props }: Props) => {
 							<motion.p className='card__rating'>{item_rating} / 5 ★</motion.p>
 						</motion.li>
 					</motion.ul>
-					<motion.button className='button__2' onClick={() => addToCart(item)}>
-						Add to Cart
-					</motion.button>
 				</motion.div>
 			</motion.div>
+			{addItem && (
+				<motion.button className='button__2' onClick={() => addItem(key)}>
+					Add to Cart
+				</motion.button>
+			)}
+			{removeItem && (
+				<motion.button className='button__2' onClick={() => removeItem(key)}>
+					Remove Item
+				</motion.button>
+			)}
 		</motion.div>
 	)
 }
