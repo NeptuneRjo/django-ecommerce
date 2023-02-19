@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { StoreItemInt } from '../../types'
 import { Card, CardExpanded } from '../../components'
-import { updateCart, getItems } from '../../API'
+import { getItems, addToCart } from '../../API'
 import { PropagateLoader } from 'react-spinners'
-import { AnimatePresence, motion, LayoutGroup } from 'framer-motion'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
 
 import './styles.css'
 
@@ -27,11 +27,12 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 
 	const item = items.find((item) => item.item_title === index)
 
-	const addToCart = async (item: StoreItemInt) => {
-		if (!isItemInCart(item, cart)) {
-			const { data, errors } = await updateCart(token, [item])
+	const addItem = async (index: number) => {
+		const { data, error: resError } = await addToCart(token, items[index])
 
-			setError(errors?.to_add)
+		if (resError) {
+			setError(resError)
+		} else {
 			setCart(data.account.account_cart)
 		}
 	}
@@ -73,7 +74,11 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 				<LayoutGroup>
 					<div className='store__grid'>
 						{items.map((item, key) => (
-							<Card props={{ addToCart, item, key, index, setIndex }} />
+							<Card
+								props={{ item, key, cart }}
+								addItem={addItem}
+								motionProps={{ index, setIndex }}
+							/>
 						))}
 					</div>
 					<AnimatePresence>
