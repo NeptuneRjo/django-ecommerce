@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { StoreItemInt } from '../../types'
-import { updateCart } from '../../API'
+import { updateCart, removeFromCart } from '../../API'
+import { Card } from '../../components'
 
 import './styles.css'
 
@@ -11,61 +12,62 @@ type Props = {
 }
 
 const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
-	const [toRemove, setToRemove] = useState<StoreItemInt[]>([])
 	const [error, setError] = useState<string>('')
 
-	const removeFromCart = async () => {
-		if (toRemove.length > 0) {
-			const { data, errors } = await updateCart(token, [], toRemove)
+	const removeItem = async (index: number) => {
+		const { data, error: resError } = await removeFromCart(token, cart[index])
 
-			if (errors) {
-				setError(errors.to_add)
-			} else {
-				setCart(data.account.account_cart)
-			}
+		if (resError) {
+			setError(resError)
+		} else {
+			setCart(data.account.account_cart)
 		}
 	}
 
-	const markForRemoval = (item: StoreItemInt) => {
-		const index = toRemove
-			.map((elem) => elem.item_title)
-			.indexOf(item.item_title)
+	let cartTotal = 0
 
-		if (index > -1) {
-			const cloneToRemove = toRemove
-			cloneToRemove.splice(index, 1)
+	for (let item of cart) {
+		cartTotal += Number(item.item_price)
+	}
 
-			setToRemove([...cloneToRemove])
+	// const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
+
+	const isItemInCart = (item: StoreItemInt) => {
+		const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
+
+		if (itemInCart) {
+			return true
 		} else {
-			setToRemove([...toRemove, item])
+			return false
 		}
 	}
 
 	return (
-		<div id='cart-main'>
-			<h4 className='title'>Cart</h4>
-			{cart.length === 0 ? (
-				<div className='cart-message'>
-					<p className='message'>No items in your cart right now.</p>
-				</div>
-			) : (
-				<div id='cart-container'>
-					<div id='cart-grid'>
-						{cart.map((item, index) => (
-							<div id='grid-item' key={index}>
-								{/* <StoreItem item={item} /> */}
-								<button className='button' onClick={() => markForRemoval(item)}>
-									{toRemove.indexOf(item) > -1 ? `Undo` : `Mark for removal`}
-								</button>
-							</div>
+		<div className='cart'>
+			<h3>View and edit your cart</h3>
+			{cart.length > 0 ? (
+				<div className='cart__container'>
+					<div className='cart__items'>
+						{cart.map((item, key) => (
+							<Card
+								props={{ item, key }}
+								buttonApi={removeItem}
+								buttonContent='Remove'
+							/>
 						))}
 					</div>
-					<div id='cart-controls'>
-						<button className='button' onClick={() => removeFromCart()}>
-							Update Cart
-						</button>
+					<div className='cart__info'>
+						<h4>Checkout</h4>
+						<ul>
+							<li>Quantity: {cart.length}</li>
+							<li>Total: ${cartTotal}</li>
+						</ul>
+						<button className='button__1'>Check out</button>
 					</div>
-					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
+				</div>
+			) : (
+				<div className='cart__container'>
+					<div className='cart__empty'></div>
 				</div>
 			)}
 		</div>
