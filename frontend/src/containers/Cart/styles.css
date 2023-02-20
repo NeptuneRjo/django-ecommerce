@@ -1,39 +1,54 @@
-#cart-main {
+.cart {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: var(--spacer-lg) var(--spacer);
+    background-color: var(--light);
 
 }
 
-#cart-grid {
+.cart__container {
+    display: flex;
+    flex-direction: column-reverse;
+} 
+
+.cart__items {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 var(--spacer);
+    gap: var(--spacer);
 }
 
-.cart-message {
+.cart__info {
+    padding: var(--spacer-md);
     display: flex;
     flex-direction: column;
-}
- 
-.message {
-    grid-column: span 2;
-    text-align: center;
+    margin-bottom: var(--spacer);
 }
 
-#cart-container {
-    max-width: 60%;
+.cart__info ul {
+    padding: 0;
 }
 
-#cart-controls {
-    margin: 3rem 0;
-    display: flex;
-    justify-content: flex-end;
+@media only screen and (min-width: 992px) {
+    .cart__container {
+        flex-direction: row;
+    }
+
+    .cart__items {
+        width: 70%;
+    }
+
+    .cart__info {
+        width: 30%;
+    }
 }
 
-@media screen and (min-width: 1440px) {
-    #cart-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+@media only screen and (min-width: 1600px) {
+    .cart {
+        padding: var(--spacer);
+    }
+
+    .cart__items {
+        gap: calc(var(--spacer) / 2);
     }
 }
