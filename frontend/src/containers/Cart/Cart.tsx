@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StoreItemInt } from '../../types'
-import { updateCart, removeFromCart } from '../../API'
+import { removeFromCart } from '../../API'
 import { Card } from '../../components'
 
 import './styles.css'
@@ -30,18 +30,6 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 		cartTotal += Number(item.item_price)
 	}
 
-	// const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
-
-	const isItemInCart = (item: StoreItemInt) => {
-		const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
-
-		if (itemInCart) {
-			return true
-		} else {
-			return false
-		}
-	}
-
 	return (
 		<div className='cart'>
 			<h3>View and edit your cart</h3>
@@ -60,14 +48,16 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 						<h4>Checkout</h4>
 						<ul>
 							<li>Quantity: {cart.length}</li>
-							<li>Total: ${cartTotal}</li>
+							<li>Total: ${cartTotal.toFixed(2)}</li>
 						</ul>
-						<button className='button__1'>Check out</button>
+						<button className='button__1'>Proceed</button>
 					</div>
 				</div>
 			) : (
 				<div className='cart__container'>
-					<div className='cart__empty'></div>
+					<div className='cart__empty'>
+						<p>No items in the cart right now...</p>
+					</div>
 				</div>
 			)}
 		</div>
