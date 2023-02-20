@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { AccountInt, StoreItemInt } from '../../types'
-import { RiShoppingCart2Line, RiUser3Line } from 'react-icons/ri'
 import { ModalBackdrop, Login, Register } from '../../components'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 import './styles.css'
 
@@ -11,14 +11,15 @@ type Props = {
 		user: AccountInt | undefined
 		setUserToken: React.Dispatch<React.SetStateAction<string>>
 		setUser: React.Dispatch<React.SetStateAction<AccountInt | undefined>>
-		cart: StoreItemInt[]
 	}
 }
 
 const Navbar: React.FC<Props> = ({ props }) => {
-	const { user, setUser, setUserToken, cart } = props
+	const { user, setUser, setUserToken } = props
 
 	const [index, setIndex] = useState<boolean | string>(false)
+
+	const navigate = useNavigate()
 
 	const logout = () => {
 		setUser(undefined)
@@ -26,6 +27,8 @@ const Navbar: React.FC<Props> = ({ props }) => {
 
 		window.sessionStorage.setItem('loggedUser', JSON.stringify(undefined))
 		window.sessionStorage.setItem('token', JSON.stringify(''))
+
+		navigate('#/store')
 	}
 
 	const handleClose = useCallback(() => {

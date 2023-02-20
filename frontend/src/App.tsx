@@ -17,10 +17,14 @@ function App() {
 			if (userToken.length > 0) {
 				const { data, error } = await getAccount(userToken)
 
-				setUser(data)
-				setCart(data.account.account_cart)
-				window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
-				window.sessionStorage.setItem('token', JSON.stringify(userToken))
+				if (!data) {
+					setUserToken('')
+				} else {
+					setUser(data)
+					setCart(data.account.account_cart)
+					window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
+					window.sessionStorage.setItem('token', JSON.stringify(userToken))
+				}
 			}
 
 			// Set the user if there is one stored in sessionStorage
@@ -43,7 +47,7 @@ function App() {
 
 	return (
 		<div className='app-main'>
-			<Navbar props={{ user, setUser, setUserToken, cart }} />
+			<Navbar props={{ user, setUser, setUserToken }} />
 			<Routes>
 				<Route
 					path='/store'

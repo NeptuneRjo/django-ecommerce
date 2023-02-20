@@ -50,7 +50,7 @@ const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 							<li>Quantity: {cart.length}</li>
 							<li>Total: ${cartTotal.toFixed(2)}</li>
 						</ul>
-						<button className='button__1'>Proceed</button>
+						<button className='button__1'>Proceed to checkout</button>
 					</div>
 				</div>
 			) : (
