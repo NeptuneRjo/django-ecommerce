@@ -4,6 +4,7 @@ import { Card, CardExpanded } from '../../components'
 import { getItems, addToCart } from '../../API'
 import { PropagateLoader } from 'react-spinners'
 import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 import './styles.css'
 
@@ -26,6 +27,8 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	const [index, setIndex] = useState<boolean | string>(false)
 
 	const item = items.find((item) => item.item_title === index)
+
+	const navigate = useNavigate()
 
 	const addItem = async (index: number) => {
 		const { data, error: resError } = await addToCart(token, items[index])
@@ -94,8 +97,10 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 							) : (
 								<Card
 									props={{ item, key }}
-									buttonApi={addItem}
-									buttonContent='Add to Cart'
+									buttonApi={token ? addItem : undefined}
+									buttonContent={`${
+										token ? 'Add to Cart' : 'Log in to add to cart'
+									}`}
 									setIndex={setIndex}
 									index={index}
 								/>
@@ -103,7 +108,7 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 						)}
 					</div>
 					<AnimatePresence>
-						{index !== false && item && (
+						{index && item && (
 							<CardExpanded props={{ handleClose, index, item }} />
 						)}
 					</AnimatePresence>
