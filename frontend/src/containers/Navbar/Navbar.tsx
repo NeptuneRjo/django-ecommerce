@@ -38,8 +38,6 @@ const Navbar: React.FC<Props> = ({ props }) => {
 		document.body.classList.remove('modal-open')
 	}
 
-	console.log(user)
-
 	return (
 		<nav className='nav'>
 			<h3>
