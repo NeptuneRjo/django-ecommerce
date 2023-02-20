@@ -58,6 +58,16 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 		document.body.classList.remove('modal-open')
 	}
 
+	const isItemInCart = (item: StoreItemInt) => {
+		const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
+
+		if (itemInCart) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 	return (
 		<div className='store'>
 			{items.length === 0 ? (
@@ -73,13 +83,24 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 			) : (
 				<LayoutGroup>
 					<div className='store__grid'>
-						{items.map((item, key) => (
-							<Card
-								props={{ item, key, cart }}
-								addItem={addItem}
-								motionProps={{ index, setIndex }}
-							/>
-						))}
+						{items.map((item, key) =>
+							isItemInCart(item) ? (
+								<Card
+									props={{ item, key }}
+									buttonContent='In cart'
+									setIndex={setIndex}
+									index={index}
+								/>
+							) : (
+								<Card
+									props={{ item, key }}
+									buttonApi={addItem}
+									buttonContent='Add to Cart'
+									setIndex={setIndex}
+									index={index}
+								/>
+							)
+						)}
 					</div>
 					<AnimatePresence>
 						{index !== false && item && (
