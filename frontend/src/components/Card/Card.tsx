@@ -13,6 +13,13 @@ type Props = {
 	buttonApi?: (arg: number) => Promise<void>
 	buttonContent?: string
 }
+/**
+ * Takes in the necessary props (the item and its key).
+ * If the card is being used as a FramerJs motion component,
+ * include setIndex and index.
+ * buttonApi is your onClick function and buttonContent is the text content
+ * in the button element.
+ */
 
 const Card: React.FC<Props> = ({
 	props,
