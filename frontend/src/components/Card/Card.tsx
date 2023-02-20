@@ -8,19 +8,18 @@ type Props = {
 		item: StoreItemInt
 		key: number
 	}
-	motionProps?: {
-		setIndex: React.Dispatch<React.SetStateAction<string | boolean>>
-		index: string | boolean
-	}
-	addItem?: (index: number) => Promise<void> | undefined
-	removeItem?: (index: number) => Promise<void> | undefined
+	setIndex?: React.Dispatch<React.SetStateAction<string | boolean>>
+	index?: string | boolean
+	buttonApi?: (arg: number) => Promise<void>
+	buttonContent?: string
 }
 
 const Card: React.FC<Props> = ({
 	props,
-	motionProps = undefined,
-	addItem = undefined,
-	removeItem = undefined,
+	buttonApi = undefined,
+	buttonContent = '',
+	setIndex = undefined,
+	index = undefined,
 }: Props) => {
 	const { item, key } = props
 	const { item_title, item_image_url, item_price, item_rating } = item
@@ -31,9 +30,7 @@ const Card: React.FC<Props> = ({
 				className='card__container'
 				layoutId={`${key}`}
 				key={key}
-				onClick={() =>
-					motionProps?.index === false && motionProps.setIndex(item_title)
-				}
+				onClick={() => setIndex && index === false && setIndex(item_title)}
 			>
 				<motion.img src={`${item_image_url}`} alt={`${item_title}`} />
 
@@ -49,16 +46,12 @@ const Card: React.FC<Props> = ({
 					</motion.ul>
 				</motion.div>
 			</motion.div>
-			{addItem && (
-				<motion.button className='button__2' onClick={() => addItem(key)}>
-					Add to Cart
-				</motion.button>
-			)}
-			{removeItem && (
-				<motion.button className='button__2' onClick={() => removeItem(key)}>
-					Remove Item
-				</motion.button>
-			)}
+			<motion.button
+				className='button__2'
+				onClick={() => (buttonApi ? buttonApi(key) : () => null)}
+			>
+				{buttonContent}
+			</motion.button>
 		</motion.div>
 	)
 }
