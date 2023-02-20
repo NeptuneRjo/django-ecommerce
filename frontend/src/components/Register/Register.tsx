@@ -50,12 +50,16 @@ const Register: React.FC<Props> = ({ props }: Props) => {
 		const passAreValid = validatePasswords(password, password2)
 		if (!passAreValid) {
 			setError('Passwords do not match')
+			setLoading(false)
 			return
 		}
 
 		const inputsAreValid = validateInputs(username, password)
 		if (!inputsAreValid) {
-			setError('Username or password are invalid')
+			setError(
+				'Username must be longer than 3 characters, and passwords should be atleast 6 characters long'
+			)
+			setLoading(false)
 			return
 		}
 
@@ -113,7 +117,7 @@ const Register: React.FC<Props> = ({ props }: Props) => {
 							value={password2}
 						/>
 					</motion.div>
-					<motion.p>{error ? `Invalid username or password` : ``}</motion.p>
+					<motion.p>{error}</motion.p>
 					{loading ? (
 						<BeatLoader color='#574ae2' />
 					) : (
