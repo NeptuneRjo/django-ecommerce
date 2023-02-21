@@ -109,7 +109,13 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 					</div>
 					<AnimatePresence>
 						{index && item && (
-							<CardExpanded props={{ handleClose, index, item }} />
+							<CardExpanded
+								props={{ handleClose, index, item }}
+								buttonContent={`${
+									token ? 'Add to Cart' : 'Log in to add to cart'
+								}`}
+								buttonApi={token ? addItem : undefined}
+							/>
 						)}
 					</AnimatePresence>
 				</LayoutGroup>
