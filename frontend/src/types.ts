@@ -6,7 +6,6 @@ export interface StoreItemInt {
 	item_rating: string
 	item_count: string
 	item_title: string
-	item_id: string
 }
 
 export interface AccountInt {
