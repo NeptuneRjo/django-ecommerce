@@ -50,7 +50,7 @@ def registration_view(request):
             token = Token.objects.get(user=user).key
             data['token'] = token
         else:
-            data = serializer.errors
+            data['error'] = serializer.errors
 
         return Response(data)
 
