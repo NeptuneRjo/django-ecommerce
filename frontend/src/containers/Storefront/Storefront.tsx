@@ -30,13 +30,26 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 
 	const navigate = useNavigate()
 
-	const addItem = async (index: number) => {
-		const { data, error: resError } = await addToCart(token, items[index])
+	const addItem = async (key: number | string) => {
+		if (typeof key === 'number') {
+			const { data, error: resError } = await addToCart(token, items[key])
 
-		if (resError) {
-			setError(resError)
+			if (resError) {
+				setError(resError)
+			} else {
+				setCart(data.account.account_cart)
+			}
 		} else {
-			setCart(data.account.account_cart)
+			const { data, error: resError } = await addToCart(
+				token,
+				items[items.map((item) => item.item_title).indexOf(key)]
+			)
+
+			if (resError) {
+				setError(resError)
+			} else {
+				setCart(data.account.account_cart)
+			}
 		}
 	}
 
@@ -108,15 +121,22 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 						)}
 					</div>
 					<AnimatePresence>
-						{index && item && (
-							<CardExpanded
-								props={{ handleClose, index, item }}
-								buttonContent={`${
-									token ? 'Add to Cart' : 'Log in to add to cart'
-								}`}
-								buttonApi={token ? addItem : undefined}
-							/>
-						)}
+						{index &&
+							item &&
+							(isItemInCart(item) ? (
+								<CardExpanded
+									props={{ handleClose, index, item }}
+									buttonContent='In cart'
+								/>
+							) : (
+								<CardExpanded
+									props={{ handleClose, index, item }}
+									buttonContent={`${
+										token ? 'Add to Cart' : 'Log in to add to cart'
+									}`}
+									buttonApi={token ? addItem : undefined}
+								/>
+							))}
 					</AnimatePresence>
 				</LayoutGroup>
 			)}

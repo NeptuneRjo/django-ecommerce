@@ -10,7 +10,7 @@ type Props = {
 	}
 	setIndex?: React.Dispatch<React.SetStateAction<string | boolean>>
 	index?: string | boolean
-	buttonApi?: (arg: number) => Promise<void>
+	buttonApi?: (key: number | string) => Promise<void>
 	buttonContent?: string
 }
 /**

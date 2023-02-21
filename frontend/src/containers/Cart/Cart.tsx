@@ -14,13 +14,15 @@ type Props = {
 const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
 	const [error, setError] = useState<string>('')
 
-	const removeItem = async (index: number) => {
-		const { data, error: resError } = await removeFromCart(token, cart[index])
+	const removeItem = async (key: number | string) => {
+		if (typeof key === 'number') {
+			const { data, error: resError } = await removeFromCart(token, cart[key])
 
-		if (resError) {
-			setError(resError)
-		} else {
-			setCart(data.account.account_cart)
+			if (resError) {
+				setError(resError)
+			} else {
+				setCart(data.account.account_cart)
+			}
 		}
 	}
 

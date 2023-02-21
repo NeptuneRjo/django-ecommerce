@@ -10,7 +10,7 @@ type Props = {
 		index: string | boolean
 		item: StoreItemInt
 	}
-	buttonApi?: (arg: number) => Promise<void>
+	buttonApi?: (key: number | string) => Promise<void>
 	buttonContent?: string
 }
 
@@ -51,7 +51,7 @@ const CardExpanded: React.FC<Props> = ({
 					</motion.div>
 					<motion.button
 						className='button__2'
-						onClick={() => (buttonApi ? buttonApi(Number(index)) : () => null)}
+						onClick={() => (buttonApi ? buttonApi(item_title) : () => null)}
 					>
 						{buttonContent}
 					</motion.button>
