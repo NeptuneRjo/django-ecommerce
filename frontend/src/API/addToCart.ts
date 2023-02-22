@@ -19,6 +19,6 @@ export const addToCart = async (token: string, item: StoreItemInt) => {
 	if (response.ok) {
 		return { data: json, error: undefined }
 	} else {
-		return { data: undefined, error: json }
+		return { data: undefined, error: json.error }
 	}
 }

@@ -20,18 +20,9 @@ export const registerUser = async (
 	)
 	const json = await response.json()
 
-	const userConflict = 'A user with that username already exists.'
-
 	if (response.ok) {
-		if (json?.username[0] === userConflict) {
-			return {
-				data: undefined,
-				error: userConflict,
-			}
-		} else {
-			return { data: json, error: undefined }
-		}
+		return { data: json, error: undefined }
 	} else {
-		return { data: undefined, error: 'Error creating account.' }
+		return { data: undefined, error: json.error }
 	}
 }
