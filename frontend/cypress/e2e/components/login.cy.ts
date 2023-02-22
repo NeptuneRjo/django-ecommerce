@@ -43,4 +43,23 @@ describe('Login', () => {
 
 		cy.get('.nav__content__buttons > li > a').eq(0).contains('test')
 	})
+
+	it('shows the error message', () => {
+		cy.intercept('/api/accounts/login', {
+			statusCode: 400,
+			body: { error: '' },
+		}).as('Token')
+		cy.intercept('/api/accounts/user', { fixture: 'userFixture.json' }).as(
+			'User'
+		)
+
+		cy.get('.nav__content__buttons > li').contains('Login').click()
+		cy.get('input[name="username"]').type('test')
+		cy.get('input[name="password"]').type('testpassword')
+		cy.get('form > .button__1').click()
+
+		cy.get('form > p')
+			.contains('Unable to log in with provided credentials.')
+			.should('be.visible')
+	})
 })
