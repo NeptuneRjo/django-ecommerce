@@ -3,12 +3,16 @@ import { isItemInCart } from '../containers/Storefront/Storefront'
 import {
 	validatePasswords,
 	validateInputs,
-} from '../containers/Register/Register'
+} from '../components/Register/Register'
 
 const MOCK_ITEM = {
-	item_name: 'Test',
-	item_price: 9.99,
-	item_thumb_url: 'https://example.com',
+	item_category: 'category',
+	item_description: 'test description',
+	item_image_url: 'https://example.com',
+	item_price: '9.99',
+	item_rating: '4.5',
+	item_count: '145',
+	item_title: 'test title',
 }
 
 const MOCK_CART = [MOCK_ITEM]

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAccount } from './API'
 import { AccountInt, StoreItemInt } from './types'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Navbar, Storefront, Login, Register, Cart } from './containers'
+import { Navbar, Storefront, Cart, About, Footer } from './containers'
 
 import './App.css'
 
@@ -17,10 +17,14 @@ function App() {
 			if (userToken.length > 0) {
 				const { data, error } = await getAccount(userToken)
 
-				setUser(data)
-				setCart(data.account.account_cart)
-				window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
-				window.sessionStorage.setItem('token', JSON.stringify(userToken))
+				if (!data) {
+					setUserToken('')
+				} else {
+					setUser(data)
+					setCart(data.account.account_cart)
+					window.sessionStorage.setItem('loggedUser', JSON.stringify(data))
+					window.sessionStorage.setItem('token', JSON.stringify(userToken))
+				}
 			}
 
 			// Set the user if there is one stored in sessionStorage
@@ -43,12 +47,7 @@ function App() {
 
 	return (
 		<div className='app-main'>
-			<Navbar
-				user={user}
-				setUser={setUser}
-				setUserToken={setUserToken}
-				cart={cart}
-			/>
+			<Navbar props={{ user, setUser, setUserToken }} />
 			<Routes>
 				<Route
 					path='/store'
@@ -57,19 +56,13 @@ function App() {
 					}
 				/>
 				<Route
-					path='/login'
-					element={<Login user={user} setUserToken={setUserToken} />}
-				/>
-				<Route
-					path='/register'
-					element={<Register setUserToken={setUserToken} user={user} />}
-				/>
-				<Route
 					path='/cart'
 					element={<Cart cart={cart} setCart={setCart} token={userToken} />}
 				/>
+				<Route path='/about' element={<About />} />
 				<Route path='/' element={<Navigate to='/store' />} />
 			</Routes>
+			<Footer />
 		</div>
 	)
 }

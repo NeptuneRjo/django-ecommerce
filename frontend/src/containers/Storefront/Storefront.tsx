@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { StoreItemInt } from '../../types'
-import { StoreItem } from '../../components'
-import { updateCart, getItems } from '../../API'
+import { Card, CardExpanded } from '../../components'
+import { getItems, addToCart } from '../../API'
 import { PropagateLoader } from 'react-spinners'
+import { AnimatePresence, LayoutGroup } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 import './styles.css'
 
@@ -13,7 +15,7 @@ type Props = {
 }
 
 export const isItemInCart = (item: StoreItemInt, cart: StoreItemInt[]) => {
-	const index = cart.map((elem) => elem.item_name).indexOf(item.item_name)
+	const index = cart.map((elem) => elem.item_title).indexOf(item.item_title)
 
 	return index > -1
 }
@@ -22,15 +24,38 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [items, setItems] = useState<StoreItemInt[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
+	const [index, setIndex] = useState<boolean | string>(false)
 
-	const addToCart = async (item: StoreItemInt) => {
-		if (!isItemInCart(item, cart)) {
-			const { data, errors } = await updateCart(token, [item])
+	const item = items.find((item) => item.item_title === index)
 
-			setError(errors?.to_add)
-			setCart(data.account.account_cart)
+	const navigate = useNavigate()
+
+	const addItem = async (key: number | string) => {
+		if (typeof key === 'number') {
+			const { data, error: resError } = await addToCart(token, items[key])
+
+			if (resError) {
+				setError(resError)
+			} else {
+				setCart(data.account.account_cart)
+			}
+		} else {
+			const { data, error: resError } = await addToCart(
+				token,
+				items[items.map((item) => item.item_title).indexOf(key)]
+			)
+
+			if (resError) {
+				setError(resError)
+			} else {
+				setCart(data.account.account_cart)
+			}
 		}
 	}
+
+	const handleClose = useCallback(() => {
+		setIndex(false)
+	}, [])
 
 	useEffect(() => {
 		;(async () => {
@@ -43,36 +68,77 @@ const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
 		})()
 	}, [])
 
+	if (item) {
+		document.body.classList.add('modal-open')
+	} else {
+		document.body.classList.remove('modal-open')
+	}
+
+	const isItemInCart = (item: StoreItemInt) => {
+		const itemInCart = cart.find((elem) => elem.item_title === item.item_title)
+
+		if (itemInCart) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 	return (
-		<div id='store-main'>
+		<div className='store'>
 			{items.length === 0 ? (
-				<div className='message-container'>
-					<p className='message'>
+				<div className='message'>
+					<div className='message__content'>
 						{loading ? (
-							<PropagateLoader color='#63ccca' />
+							<PropagateLoader color='#574ae2' />
 						) : (
-							<>No items in the store right now.</>
+							<p>No items in the store right now.</p>
 						)}
-					</p>
+					</div>
 				</div>
 			) : (
-				<div id='store-grid'>
-					{items.map((item, index) => (
-						<div id='grid-item' key={index}>
-							<StoreItem item={item} />
-
-							{token.length > 1 ? (
-								<button className='button' onClick={() => addToCart(item)}>
-									{isItemInCart(item, cart) ? '✔' : `Add to cart`}
-								</button>
+				<LayoutGroup>
+					<div className='store__grid'>
+						{items.map((item, key) =>
+							isItemInCart(item) ? (
+								<Card
+									props={{ item, key }}
+									buttonContent='In cart'
+									setIndex={setIndex}
+									index={index}
+								/>
 							) : (
-								<button className='button'>
-									<a href='#/login'>Log in to add to cart</a>
-								</button>
-							)}
-						</div>
-					))}
-				</div>
+								<Card
+									props={{ item, key }}
+									buttonApi={token ? addItem : undefined}
+									buttonContent={`${
+										token ? 'Add to Cart' : 'Log in to add to cart'
+									}`}
+									setIndex={setIndex}
+									index={index}
+								/>
+							)
+						)}
+					</div>
+					<AnimatePresence>
+						{index &&
+							item &&
+							(isItemInCart(item) ? (
+								<CardExpanded
+									props={{ handleClose, index, item }}
+									buttonContent='In cart'
+								/>
+							) : (
+								<CardExpanded
+									props={{ handleClose, index, item }}
+									buttonContent={`${
+										token ? 'Add to Cart' : 'Log in to add to cart'
+									}`}
+									buttonApi={token ? addItem : undefined}
+								/>
+							))}
+					</AnimatePresence>
+				</LayoutGroup>
 			)}
 		</div>
 	)

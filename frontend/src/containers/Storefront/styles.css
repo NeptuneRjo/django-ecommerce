@@ -1,22 +1,20 @@
-#store-main {
+.store {
     display: flex;
     justify-content: center;
     height: 100%;
     flex-grow: 1;
+    background-color: var(--light);
 }
 
-#store-grid {
+.store__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    padding: 10%;
-    height: 100%;
-
-    gap: 1rem;
-    max-width: 2000px;
+    grid-template-columns: 1fr;
+    padding: var(--spacer-md);
+    gap: var(--spacer-lg);
+    grid-auto-rows: 1fr;
 }
 
-.message-container {
+.message {
     display: flex;
     height: 100%;
     flex-grow: 1;
@@ -25,8 +23,29 @@
 }
 
 @media screen and (min-width: 1440px) {
-    #store-grid {
+    .store__grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .store__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacer-md)
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .store__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacer-md)
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .store__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--spacer)
     }
 }

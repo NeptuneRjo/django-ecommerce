@@ -1,3 +1,12 @@
+/*** 
+Class naming conventions:
+
+classname -> classname__subclass / classname--importance
+***/
+
+
+
+
 h4.title {
     font-size: 1.3em;
     letter-spacing: 1px;

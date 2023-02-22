@@ -4,7 +4,8 @@ import {
 	getAccount,
 	loginUser,
 	registerUser,
-	updateCart,
+	addToCart,
+	removeFromCart,
 } from '../API'
 
 const unmockedFetch = global.fetch
@@ -20,9 +21,13 @@ const mockFetch = async (response: boolean, data: object | []) => {
 }
 
 const MOCK_ITEM = {
-	item_name: 'Foo',
-	item_price: '299.99',
-	item_thumb_url: 'https://www.example.com',
+	item_category: 'category',
+	item_description: 'test description',
+	item_image_url: 'https://example.com',
+	item_price: '9.99',
+	item_rating: '4.5',
+	item_count: '145',
+	item_title: 'test title',
 }
 
 const MOCK_ACCOUNT = {
@@ -32,8 +37,6 @@ const MOCK_ACCOUNT = {
 		},
 		account_cart: [MOCK_ITEM],
 	},
-	to_add_error: 'Error',
-	to_remove_error: 'Error',
 }
 
 const MOCK_LOGIN = {
@@ -138,19 +141,35 @@ describe('API', () => {
 		})
 	})
 
-	describe('updateCart', () => {
+	describe('addToCart', () => {
 		it('returns the updated cart', async () => {
 			mockFetch(true, MOCK_ACCOUNT)
 
-			const response = await updateCart('token', [])
+			const response = await addToCart('token', MOCK_ITEM)
 			expect(response).toEqual({ data: MOCK_ACCOUNT })
 		})
 
-		it('returns the errors', async () => {
-			mockFetch(false, MOCK_ACCOUNT)
+		it('returns an error', async () => {
+			mockFetch(false, { error: 'No item found' })
 
-			const response = await updateCart('token', [])
-			expect(response).toEqual({ errors: MOCK_CART_ERRORS })
+			const response = await addToCart('token', MOCK_ITEM)
+			expect(response).toEqual({ error: { error: 'No item found' } })
+		})
+	})
+
+	describe('removeFromCart', () => {
+		it('returns the updated cart', async () => {
+			mockFetch(true, MOCK_ACCOUNT)
+
+			const response = await removeFromCart('token', MOCK_ITEM)
+			expect(response).toEqual({ data: MOCK_ACCOUNT })
+		})
+
+		it('returns an error', async () => {
+			mockFetch(false, { error: 'No item found' })
+
+			const response = await removeFromCart('token', MOCK_ITEM)
+			expect(response).toEqual({ error: { error: 'No item found' } })
 		})
 	})
 })

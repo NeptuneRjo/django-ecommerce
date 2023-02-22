@@ -8,7 +8,26 @@ from ecommerce_api.models import StoreItem
 from .serializers import AccountSerializer, RegistrationSerializer
 from .models import Account
 
-# register user
+
+@api_view(['GET', ])
+@permission_classes([IsAuthenticated, ])
+def get_user(request):
+
+    user = request.user
+    data = {}
+
+    try:
+        account = Account.objects.get(user__username=user.username)
+        data['account'] = AccountSerializer(account).data
+    except Account.DoesNotExist:
+        data['error'] = 'No Account found'
+    except Exception as err:
+        data['error'] = str(err)
+
+    if 'error' in data:
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(data)
 
 
 @api_view(['POST', ])
@@ -24,50 +43,70 @@ def registration_view(request):
             account = Account(user=user)
             account.save()
 
-            data['response'] = 'successfully registered a new user.'
             data['username'] = account.user.username
 
             # Must be a User object
             token = Token.objects.get(user=user).key
             data['token'] = token
         else:
-            data = serializer.errors
+            data['error'] = str(serializer.errors['username'][0].title())
 
-        return Response(data)
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(data)
 
 
-@api_view(['GET', 'PATCH'])
+@api_view(['PATCH', ])
 @permission_classes([IsAuthenticated, ])
-def user_view(request):
-
+def add_to_cart(request):
     user = request.user
-    account = Account.objects.get(user__username=user.username)
+    account = Account.objects.get(user=user)
 
     data = {}
 
     if request.method == 'PATCH':
-        to_add = request.data.get('to_add')
-        to_remove = request.data.get('to_remove')
-
-        # Adds items; throws error if item does not exist
         try:
-            for item in to_add:
-                found_item = StoreItem.objects.get(item_name=item['item_name'])
-                account.account_cart.add(found_item)
-        except StoreItem.DoesNotExist as e:
-            data['to_add_error'] = 'Item(s) do not exist.'
+            item = request.data['item']
+            item_to_add = StoreItem.objects.get(
+                item_title=item.get('item_title'))
+            account.account_cart.add(item_to_add)
 
-        # Removes items; throws error if item does not exist
+        except StoreItem.DoesNotExist as error:
+            data['error'] = 'Item does not exist'
+        except Exception as error:
+            data['error'] = 'An error has occured'
+            print(str(error))
+
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            data['account'] = AccountSerializer(account).data
+            return Response(data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH', ])
+@permission_classes([IsAuthenticated, ])
+def remove_from_cart(request):
+    user = request.user
+    account = Account.objects.get(user=user)
+
+    data = {}
+
+    if request.method == 'PATCH':
         try:
-            for item in to_remove:
-                found_item = StoreItem.objects.get(item_name=item['item_name'])
-                account.account_cart.remove(found_item)
-        except StoreItem.DoesNotExist as e:
-            data['to_remove_error'] = 'Item(s) do not exist.'
+            item = request.data['item']
+            item_to_remove = StoreItem.objects.get(
+                item_title=item.get('item_title'))
+            account.account_cart.remove(item_to_remove)
 
-    data['account'] = AccountSerializer(account).data
+        except StoreItem.DoesNotExist as error:
+            data['error'] = 'Item does not exist'
+        except Exception as err:
+            data['error'] = str(err)
 
-    if 'to_remove_error' in data or 'to_add_error' in data:
-        return Response(data, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response(data)
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            data['account'] = AccountSerializer(account).data
+            return Response(data, status=status.HTTP_200_OK)

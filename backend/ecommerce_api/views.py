@@ -18,3 +18,22 @@ def get_items(request):
 
 # Possible need for the ability to manipulate the items outside of the database?
 # Maybe post request...?
+@api_view(['POST', ])
+@permission_classes([BasePermission, ])
+def post_items(request):
+    if request.method == 'POST':
+        serializer = StoreItemSerializer(data=request.data)
+        checkIfItem = StoreItem.objects.filter(
+            item_title=request.data.get('item_title')).exists()
+        data = {}
+
+        if serializer.is_valid() & checkIfItem == False:
+            item = serializer.save()
+
+            data['response'] = 'Successfully created item'
+
+        else:
+            data['error'] = serializer.errors
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(data)

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { AccountInt } from '../../types'
 import { registerUser } from '../../API'
-import { useNavigate } from 'react-router-dom'
-import { Message } from '../../components'
 import { BeatLoader } from 'react-spinners'
+import { motion } from 'framer-motion'
 
 import './styles.css'
 
 type Props = {
-	setUserToken: React.Dispatch<React.SetStateAction<string>>
-	user: AccountInt | undefined
+	props: {
+		setUserToken: React.Dispatch<React.SetStateAction<string>>
+		handleClose: () => void
+	}
 }
 
 export const validatePasswords = (
@@ -33,14 +33,15 @@ export const validateInputs = (username: string, password: string): boolean => {
 	return true
 }
 
-const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
+const Register: React.FC<Props> = ({ props }: Props) => {
+	const { setUserToken, handleClose } = props
+
 	const [username, setUsername] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
 	const [password2, setPassword2] = useState<string>('')
+
 	const [error, setError] = useState<string>('')
 	const [loading, setLoading] = useState<boolean>(false)
-
-	const navigate = useNavigate()
 
 	const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -49,12 +50,16 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 		const passAreValid = validatePasswords(password, password2)
 		if (!passAreValid) {
 			setError('Passwords do not match')
+			setLoading(false)
 			return
 		}
 
 		const inputsAreValid = validateInputs(username, password)
 		if (!inputsAreValid) {
-			setError('Username or password are invalid')
+			setError(
+				'Username must be longer than 3 characters, and passwords should be atleast 6 characters long'
+			)
+			setLoading(false)
 			return
 		}
 
@@ -66,54 +71,63 @@ const Register: React.FC<Props> = ({ setUserToken, user }: Props) => {
 
 		if (responseError) {
 			setError(responseError)
+			setLoading(false)
 		} else {
 			setUserToken(data.token)
-			navigate('/store')
+			setLoading(false)
+			handleClose()
 		}
 	}
 
 	return (
-		<div id='register-main'>
-			<h4 className='title'>Register</h4>
-			{user === undefined ? (
-				<form onSubmit={(e) => submitForm(e)}>
-					<div className='register-section'>
-						<label htmlFor='username'>Enter your username / email:</label>
-						<input
+		<motion.div className='register' key='modal'>
+			<motion.div onClick={() => handleClose()} className='register__close'>
+				X
+			</motion.div>
+			<motion.div className='register__container'>
+				<motion.form onSubmit={(e) => submitForm(e)}>
+					<motion.div className='register__container-section'>
+						<motion.label htmlFor='username'>
+							Enter your username / email:
+						</motion.label>
+						<motion.input
 							type='text'
 							name='username'
 							onChange={(e) => setUsername(e.target.value)}
 							value={username}
 						/>
-					</div>
-					<div className='register-section'>
-						<label htmlFor='password'>Enter your password:</label>
-						<input
+					</motion.div>
+					<motion.div className='register__container-section'>
+						<motion.label htmlFor='password'>Enter a password:</motion.label>
+						<motion.input
 							type='password'
 							name='password'
 							onChange={(e) => setPassword(e.target.value)}
 							value={password}
 						/>
-					</div>
-					<div className='register-section'>
-						<label htmlFor='password2'>Re-enter your password:</label>
-						<input
+					</motion.div>
+					<motion.div className='register__container-section'>
+						<motion.label htmlFor='password2'>
+							Re-Enter your password:
+						</motion.label>
+						<motion.input
 							type='password'
 							name='password2'
 							onChange={(e) => setPassword2(e.target.value)}
 							value={password2}
 						/>
-						{loading && <BeatLoader color='#63ccca' size={10} />}
-					</div>
-					<p className={`error-message ${error ? 'enabled' : ''}`}>{error}</p>
-					<button className='button' type='submit'>
-						Register
-					</button>
-				</form>
-			) : (
-				<Message />
-			)}
-		</div>
+					</motion.div>
+					<motion.p>{error}</motion.p>
+					{loading ? (
+						<BeatLoader color='#574ae2' />
+					) : (
+						<motion.button type='submit' className='button__1'>
+							Register
+						</motion.button>
+					)}
+				</motion.form>
+			</motion.div>
+		</motion.div>
 	)
 }
 
