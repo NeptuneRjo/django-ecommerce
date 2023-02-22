@@ -15,19 +15,13 @@ const Footer = () => {
 				</ul>
 			</div>
 			<div className='footer__col'>
-				<ul>
+				<ul data-test-id='navigate'>
 					<h4>Navigate</h4>
 					<li>
 						<a href='#/store'>Store</a>
 					</li>
 					<li>
-						<a href='#/About'>About</a>
-					</li>
-					<li>
-						<a href='#/login'>Log in</a>
-					</li>
-					<li>
-						<a href='#/register'>Create an account</a>
+						<a href='#/about'>About</a>
 					</li>
 				</ul>
 			</div>
