@@ -14,6 +14,12 @@ describe('Card Expanded', () => {
 		cy.get('.card-expanded').should('be.visible')
 	})
 
+	it('displays the background with the modal', () => {
+		cy.get('.card__container').click()
+
+		cy.get('.card-backdrop').should('exist')
+	})
+
 	it('displays the content in the modal', () => {
 		cy.get('.card__container').click()
 
