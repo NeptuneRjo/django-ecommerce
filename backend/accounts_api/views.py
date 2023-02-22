@@ -43,16 +43,18 @@ def registration_view(request):
             account = Account(user=user)
             account.save()
 
-            data['response'] = 'successfully registered a new user.'
             data['username'] = account.user.username
 
             # Must be a User object
             token = Token.objects.get(user=user).key
             data['token'] = token
         else:
-            data['error'] = serializer.errors
+            data['error'] = str(serializer.errors['username'][0].title())
 
-        return Response(data)
+        if 'error' in data:
+            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(data)
 
 
 @api_view(['PATCH', ])
