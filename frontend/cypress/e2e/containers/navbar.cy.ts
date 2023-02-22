@@ -64,5 +64,8 @@ describe('Navbar', () => {
 			.eq(1)
 			.should('have.attr', 'href')
 			.should('include', '#/about')
+		cy.get('.nav > h3 > a')
+			.should('have.attr', 'href')
+			.should('include', '#/store')
 	})
 })
