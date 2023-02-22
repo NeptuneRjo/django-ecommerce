@@ -69,7 +69,7 @@ const Login: React.FC<Props> = ({ props }: Props) => {
 							value={password}
 						/>
 					</motion.div>
-					<motion.p>{error ? `Invalid username or password` : ``}</motion.p>
+					<motion.p>{error}</motion.p>
 					{loading ? (
 						<BeatLoader color='#574ae2' />
 					) : (
