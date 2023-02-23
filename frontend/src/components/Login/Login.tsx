@@ -5,14 +5,28 @@ import { motion } from 'framer-motion'
 
 import './styles.css'
 
-type Props = {
+/** Login modal; to be used in an *AnimatePresence* component.
+ *
+ * @example
+ * ```javascript
+ * const handleClose = useCallback(() => {
+ * 		setIndex(false)
+ * }, [])
+ *
+ * <Login
+ * 	props={{setUserToken, handleClose}}
+ * />
+ *
+ * ```
+ *
+ */
+
+const Login: React.FC<{
 	props: {
 		setUserToken: React.Dispatch<React.SetStateAction<string>>
 		handleClose: () => void
 	}
-}
-
-const Login: React.FC<Props> = ({ props }: Props) => {
+}> = ({ props }) => {
 	const { setUserToken, handleClose } = props
 
 	const [username, setUsername] = useState<string>('')

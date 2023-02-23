@@ -5,13 +5,6 @@ import { motion } from 'framer-motion'
 
 import './styles.css'
 
-type Props = {
-	props: {
-		setUserToken: React.Dispatch<React.SetStateAction<string>>
-		handleClose: () => void
-	}
-}
-
 export const validatePasswords = (
 	password1: string,
 	password2: string
@@ -33,7 +26,28 @@ export const validateInputs = (username: string, password: string): boolean => {
 	return true
 }
 
-const Register: React.FC<Props> = ({ props }: Props) => {
+/** Register modal; to be used in an *AnimatePresence* component.
+ *
+ * @example
+ * ```javascript
+ * const handleClose = useCallback(() => {
+ * 		setIndex(false)
+ * }, [])
+ *
+ * <Register
+ * 	props={{setUserToken, handleClose}}
+ * />
+ *
+ * ```
+ *
+ */
+
+const Register: React.FC<{
+	props: {
+		setUserToken: React.Dispatch<React.SetStateAction<string>>
+		handleClose: () => void
+	}
+}> = ({ props }) => {
 	const { setUserToken, handleClose } = props
 
 	const [username, setUsername] = useState<string>('')

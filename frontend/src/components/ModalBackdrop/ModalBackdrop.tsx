@@ -2,11 +2,23 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import './styles.css'
 
-type Props = {
-	handleClose: () => void
-}
+/** The backdrop to be rendered with modals. Allows for closing of the AnimatePresence if the background is clicked
+ *
+ * @example
+ * ```javascript
+ * const handleClose = useCallback(() => {
+ * 	setIndex(false)
+ * }, [])
+ *
+ * <ModalBackdrop
+ *  handleClose={handleClose}
+ * />
+ * ```
+ */
 
-const ModalBackdrop: React.FC<Props> = ({ handleClose }: Props) => {
+const ModalBackdrop: React.FC<{
+	handleClose: () => void
+}> = ({ handleClose }) => {
 	return (
 		<motion.div
 			key='backdrop'
