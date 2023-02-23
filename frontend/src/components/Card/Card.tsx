@@ -9,6 +9,7 @@ import './styles.css'
  * 	Card component that displays store items with functional customization. Can be used along side
  * 	Framer-Motion AnimatePresence components.
  *
+ * 	@example
  *  ```javascript
  * 	<Card
  * 		props={{item, key}}

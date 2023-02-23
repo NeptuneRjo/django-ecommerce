@@ -7,6 +7,7 @@ import CardBackdrop from '../ModalBackdrop/ModalBackdrop'
 /**
  * The AnimatePresence Component to be used along side the `<Card />` component.
  *
+ * @example
  * ```javascript
  * const handleClose = useCallback(() => {
  * 	setIndex(false)
