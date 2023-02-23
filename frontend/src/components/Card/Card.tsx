@@ -5,23 +5,47 @@ import './styles.css'
 
 type Props = {
 	props: {
-		item: StoreItemInt
+		item: StoreItemInt /** The store item	*/
+		/** The key of the item, used for motion and button functionality */
 		key: number
 	}
+
 	setIndex?: React.Dispatch<React.SetStateAction<string | boolean>>
+
 	index?: string | boolean
 	buttonApi?: (key: number | string) => Promise<void>
 	buttonContent?: string
 }
 /**
- * Takes in the necessary props (the item and its key).
- * If the card is being used as a FramerJs motion component,
- * include setIndex and index.
- * buttonApi is your onClick function and buttonContent is the text content
- * in the button element.
+ * 	*The item to be rendered and its key are required.*
+ *
+ * 	Card component that displays store items with functional customization. Can be used along side
+ * 	Framer-Motion AnimatePresence components.
+ *
+ *  ```javascript
+ * 	<Card
+ * 		props={{item, key}}
+ * 		setIndex={setIndex}
+ * 		index={index}
+ * 		buttonApi={(key) => api call}
+ * 		buttonContent='Add to cart'
+ * 	/>
+ * ```
  */
 
-const Card: React.FC<Props> = ({
+const Card: React.FC<{
+	/** The item to be rendered and its key */
+	props: {
+		item: StoreItemInt
+		key: number
+	}
+	/** Toggles the AnimatePresence component */
+	setIndex?: React.Dispatch<React.SetStateAction<string | boolean>>
+	index?: string | boolean
+	/** API call tied to the button */
+	buttonApi?: (key: number | string) => Promise<void>
+	buttonContent?: string
+}> = ({
 	props,
 	buttonApi = undefined,
 	buttonContent = '',
