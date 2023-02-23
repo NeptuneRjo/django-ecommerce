@@ -4,21 +4,34 @@ import { StoreItemInt } from '../../types'
 import './styles.css'
 import CardBackdrop from '../ModalBackdrop/ModalBackdrop'
 
-type Props = {
+/**
+ * The AnimatePresence Component to be used along side the `<Card />` component.
+ *
+ * ```javascript
+ * const handleClose = useCallback(() => {
+ * 	setIndex(false)
+ * }, [])
+ *
+ * <CardExpanded
+ * 	props={{handleClose, item, index}}
+ * 	buttonApi={function(key: string | number)}
+ * 	buttonContent=''
+ * />
+ *
+ * ```
+ */
+
+const CardExpanded: React.FC<{
+	/** The item, its index, and the function to close the AnimatePresence */
 	props: {
 		handleClose: () => void
 		index: string | boolean
 		item: StoreItemInt
 	}
+	/** API call tied to the button */
 	buttonApi?: (key: number | string) => Promise<void>
 	buttonContent?: string
-}
-
-const CardExpanded: React.FC<Props> = ({
-	props,
-	buttonApi = undefined,
-	buttonContent = '',
-}: Props) => {
+}> = ({ props, buttonApi = undefined, buttonContent = '' }) => {
 	const { handleClose, index, item } = props
 	const {
 		item_title,
