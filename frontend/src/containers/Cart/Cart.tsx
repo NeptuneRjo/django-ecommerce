@@ -5,13 +5,11 @@ import { Card } from '../../components'
 
 import './styles.css'
 
-type Props = {
+const Cart: React.FC<{
 	cart: StoreItemInt[]
 	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
 	token: string
-}
-
-const Cart: React.FC<Props> = ({ cart, setCart, token }: Props) => {
+}> = ({ cart, setCart, token }) => {
 	const [error, setError] = useState<string>('')
 
 	const removeItem = async (key: number | string) => {

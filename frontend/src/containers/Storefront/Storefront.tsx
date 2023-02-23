@@ -8,19 +8,17 @@ import { useNavigate } from 'react-router-dom'
 
 import './styles.css'
 
-type Props = {
-	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
-	token: string
-	cart: StoreItemInt[]
-}
-
 export const isItemInCart = (item: StoreItemInt, cart: StoreItemInt[]) => {
 	const index = cart.map((elem) => elem.item_title).indexOf(item.item_title)
 
 	return index > -1
 }
 
-const Storefront: React.FC<Props> = ({ token, setCart, cart }: Props) => {
+const Storefront: React.FC<{
+	setCart: React.Dispatch<React.SetStateAction<StoreItemInt[]>>
+	token: string
+	cart: StoreItemInt[]
+}> = ({ token, setCart, cart }) => {
 	const [error, setError] = useState<string | undefined>(undefined)
 	const [items, setItems] = useState<StoreItemInt[]>([])
 	const [loading, setLoading] = useState<boolean>(true)

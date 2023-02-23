@@ -6,15 +6,13 @@ import { useNavigate } from 'react-router-dom'
 
 import './styles.css'
 
-type Props = {
+const Navbar: React.FC<{
 	props: {
 		user: AccountInt | undefined
 		setUserToken: React.Dispatch<React.SetStateAction<string>>
 		setUser: React.Dispatch<React.SetStateAction<AccountInt | undefined>>
 	}
-}
-
-const Navbar: React.FC<Props> = ({ props }) => {
+}> = ({ props }) => {
 	const { user, setUser, setUserToken } = props
 
 	const [index, setIndex] = useState<boolean | string>(false)
