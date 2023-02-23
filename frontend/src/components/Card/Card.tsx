@@ -3,19 +3,6 @@ import React from 'react'
 import { StoreItemInt } from '../../types'
 import './styles.css'
 
-type Props = {
-	props: {
-		item: StoreItemInt /** The store item	*/
-		/** The key of the item, used for motion and button functionality */
-		key: number
-	}
-
-	setIndex?: React.Dispatch<React.SetStateAction<string | boolean>>
-
-	index?: string | boolean
-	buttonApi?: (key: number | string) => Promise<void>
-	buttonContent?: string
-}
 /**
  * 	*The item to be rendered and its key are required.*
  *
@@ -51,7 +38,7 @@ const Card: React.FC<{
 	buttonContent = '',
 	setIndex = undefined,
 	index = undefined,
-}: Props) => {
+}) => {
 	const { item, key } = props
 	const { item_title, item_image_url, item_price, item_rating } = item
 
