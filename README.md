@@ -1,25 +1,24 @@
 ## Django Ecommerce (Fullstack)
 
-Django Ecommerce is a fullstack React-Django application that allows users to login and add items to their cart.
+Django Ecommerce is a fullstack React-Django application that is built to simulate an ecommerce web store. Functionality includes personal accounts and the ability to save items to the cart.
 
 You can visit [here](https://neptunerjo.github.io/django-ecommerce)
 
 ## Demo
 
-![Demo](./demo.gif)
+![General Functionality](./demo1.gif)
+![Authentication and Cart](./demo2.gif)
 
 ## Reflection
 
-This was a project built with the goal of learning and mastering Django, particularly Django-Rest-Framework.
-Django Ecommerce also allowed for Python and React-TypeScript practice.
+This was a project built with the goal of learning Django-Rest-Framework, FramerJS, and improving my ReactJS skills.
 
-I wanted to build a basic fullstack ecommerce site that exercises basic backend practices with new technologies.
-Creating a site that authorizes users and allows them to edit their carts felt like a good introduction to Django.
+I wanted to build a fullstack ecommerce web application that exercised backend principles like CRUD and REST with new a technology.
+CRUD functionality felt like a good place to start, and learning how Django handles things like authorization and DB management helped me grow as a backend developer.
 
-Figuring out Django and Django-Rest-Framework was the challenge for this project. Everything from SQLite to the file structure of Django projects was new to me.
-The trickiest part was creating testable, simple and functional views that performed correctly and handled errors at a rudimentary level.
+There were a few challenges with this project, or atleast new things to practice. Python3 and Django are completely new to me, and this is my first project with both. On the frontend, I used an animation framework Framer-Motion, which I've never used before. I also took the time to develop my css skills, creating a rudementary design system for easier styling.
 
 The tools implemented in this project are:
 
-- Frontend: React, TypeScript, React-Router-Dom, Cypress.io, Jest
+- Frontend: React, TypeScript, React-Router-Dom, Cypress.io, Jest, and Framer-Motion
 - Backend: Django, Django-Rest-Framework, SQLite, Python3
