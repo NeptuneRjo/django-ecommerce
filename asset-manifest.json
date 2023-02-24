@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/django-ecommerce/static/css/main.1755836a.css",
-    "main.js": "/django-ecommerce/static/js/main.1d1998a4.js",
+    "main.css": "/django-ecommerce/static/css/main.327e43d8.css",
+    "main.js": "/django-ecommerce/static/js/main.ee3191e0.js",
     "index.html": "/django-ecommerce/index.html",
-    "main.1755836a.css.map": "/django-ecommerce/static/css/main.1755836a.css.map",
-    "main.1d1998a4.js.map": "/django-ecommerce/static/js/main.1d1998a4.js.map"
+    "main.327e43d8.css.map": "/django-ecommerce/static/css/main.327e43d8.css.map",
+    "main.ee3191e0.js.map": "/django-ecommerce/static/js/main.ee3191e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.1755836a.css",
-    "static/js/main.1d1998a4.js"
+    "static/css/main.327e43d8.css",
+    "static/js/main.ee3191e0.js"
   ]
 }
